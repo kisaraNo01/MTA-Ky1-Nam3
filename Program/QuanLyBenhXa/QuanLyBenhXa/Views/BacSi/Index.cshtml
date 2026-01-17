@@ -1,0 +1,59 @@
+@model IEnumerable<QuanLyBenhXa.Models.BacSi>
+
+@{
+    ViewData["Title"] = "Danh sách Bác sĩ";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 text-primary fw-bold text-uppercase">Danh sách Bác sĩ</h1>
+        <a asp-action="Create" class="btn btn-primary px-4">
+            <i class="bi bi-plus-lg me-2"></i>Thêm mới
+        </a>
+    </div>
+
+    <div class="card border-0 border-top border-3 border-primary">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-white text-primary border-bottom border-primary">
+                        <tr>
+                            <th class="ps-4 py-3">@Html.DisplayNameFor(model => model.Ten)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.NgaySinh)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.GioiTinh)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.CapBac)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.ChucVu)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.PhongKham)</th>
+                            <th class="text-end pe-4 py-3">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model) {
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark">@Html.DisplayFor(modelItem => item.Ten)</td>
+                                <td>@Html.DisplayFor(modelItem => item.NgaySinh)</td>
+                                <td>@Html.DisplayFor(modelItem => item.GioiTinh)</td>
+                                <td><span class="badge border border-success text-success bg-transparent">@Html.DisplayFor(modelItem => item.CapBac)</span></td>
+                                <td>@Html.DisplayFor(modelItem => item.ChucVu)</td>
+                                <td><span class="badge border border-primary text-primary bg-transparent">@Html.DisplayFor(modelItem => item.PhongKham)</span></td>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" title="Sửa">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary" title="Chi tiết">
+                                            <i class="bi bi-info-circle"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

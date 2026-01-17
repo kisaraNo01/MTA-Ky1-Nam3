@@ -1,0 +1,78 @@
+@model QuanLyBenhXa.Models.Thuoc
+
+@{
+    ViewData["Title"] = "Chi tiết Thuốc";
+}
+
+<h1>Chi tiết Thuốc</h1>
+
+<div>
+    <h4>Thuốc</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenThuoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenThuoc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NhaSanXuat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NhaSanXuat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViTinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViTinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HamLuong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HamLuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CachDung)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CachDung)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongTon)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongTon)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+    </dl>
+</div>
+
+<!-- Import Section -->
+<div class="card bg-light mb-3">
+    <div class="card-header">Nhập Thuốc</div>
+    <div class="card-body">
+        <form asp-action="NhapThuoc" method="post" class="row g-3">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div class="col-auto">
+                <label for="soLuongNhap" class="visually-hidden">Số lượng nhập</label>
+                <input type="number" class="form-control" id="soLuongNhap" name="soLuongNhap" placeholder="Nhập số lượng" min="1" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success mb-3">Nhập kho</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Sửa</a> |
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>

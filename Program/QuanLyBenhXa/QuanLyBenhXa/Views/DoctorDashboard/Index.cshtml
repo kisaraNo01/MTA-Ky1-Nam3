@@ -1,0 +1,86 @@
+@model QuanLyBenhXa.Controllers.DoctorDashboardViewModel
+
+@{
+    ViewData["Title"] = "Bàn làm việc Bác sĩ";
+}
+
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold text-primary">Xin chào, @ViewBag.BacSiName!</h2>
+            <p class="text-muted">Phòng khám: <strong>@ViewBag.PhongKham</strong></p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Room Requests Column -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <i class="bi bi-bell me-2"></i> Yêu cầu khám tại phòng (@Model.RoomRequests.Count)
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.RoomRequests.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var item in Model.RoomRequests)
+                            {
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex w-100 justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold">@item.BenhNhan?.HoTen</h6>
+                                        <small class="text-muted">@item.NgayKham.ToShortDateString()</small>
+                                    </div>
+                                    <p class="mb-1 small text-secondary">Triệu chứng: @item.TrieuChung</p>
+                                    <div class="mt-2 text-end">
+                                        <a asp-controller="KetQuaKhamBenh" asp-action="Create" asp-route-hosoId="@item.Id" asp-route-phongKham="@ViewBag.PhongKham" class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-stethoscope me-1"></i> Khám ngay
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-4 text-center text-muted">Không có yêu cầu khám mới.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- My Records Column -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <i class="bi bi-folder2 me-2"></i> Hồ sơ phụ trách (@Model.MyRecords.Count)
+                </div>
+                <div class="card-body p-0">
+                     @if (Model.MyRecords.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var item in Model.MyRecords)
+                            {
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex w-100 justify-content-between mb-1">
+                                        <h6 class="mb-0 fw-bold">@item.BenhNhan?.HoTen</h6>
+                                        <small class="@(string.IsNullOrEmpty(item.KetLuan) ? "text-warning" : "text-success fw-bold")">
+                                            @(string.IsNullOrEmpty(item.KetLuan) ? "Đang khám" : "Hoàn thành")
+                                        </small>
+                                    </div>
+                                    <p class="mb-1 small text-secondary">Ngày khám: @item.NgayKham.ToShortDateString()</p>
+                                    <a asp-controller="BenhNhan" asp-action="Details" asp-route-id="@item.BenhNhanId" class="btn btn-sm btn-primary mt-2">
+                                        <i class="bi bi-arrow-right-circle me-1"></i> Quản lý
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                         <div class="p-4 text-center text-muted">Bạn chưa phụ trách hồ sơ nào.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

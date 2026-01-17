@@ -1,0 +1,53 @@
+@model QuanLyBenhXa.Models.DonThuoc
+
+@{
+    ViewData["Title"] = "Thêm thuốc vào đơn";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header bg-success text-white p-4 rounded-top-4">
+                    <h4 class="mb-0 fw-bold">Kê đơn thuốc</h4>
+                    <p class="mb-0 mt-2 opacity-75">Bệnh nhân: <strong>@ViewBag.BenhNhanName</strong></p>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="HoSoKhamBenhId" value="@ViewBag.HoSoId" />
+                        
+                        <div class="mb-3">
+                            <label asp-for="ThuocId" class="form-label fw-semibold text-secondary">Chọn thuốc</label>
+                            <select asp-for="ThuocId" class="form-select" asp-items="ViewBag.ThuocId">
+                                <option value="">-- Chọn thuốc --</option>
+                            </select>
+                            <span asp-validation-for="ThuocId" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="SoLuong" class="form-label fw-semibold text-secondary"></label>
+                            <input asp-for="SoLuong" class="form-control" />
+                            <span asp-validation-for="SoLuong" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="CachDung" class="form-label fw-semibold text-secondary"></label>
+                            <textarea asp-for="CachDung" class="form-control" rows="2" placeholder="Ví dụ: Sáng 1 viên, Tối 1 viên, sau ăn"></textarea>
+                            <span asp-validation-for="CachDung" class="text-danger"></span>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                             <a href="javascript:history.back()" class="btn btn-light border">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-success px-4">Thêm vào đơn</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

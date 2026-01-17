@@ -1,0 +1,284 @@
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.csproj.AssemblyReference.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.GeneratedMSBuildEditorConfig.editorconfig
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.AssemblyInfoInputs.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.AssemblyInfo.cs
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.csproj.CoreCompileInputs.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.MvcApplicationPartsAssemblyInfo.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.RazorAssemblyInfo.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.RazorAssemblyInfo.cs
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\appsettings.Development.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\appsettings.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.staticwebassets.runtime.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.staticwebassets.endpoints.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.exe
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.deps.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.runtimeconfig.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.pdb
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Azure.Core.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Azure.Identity.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Humanizer.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.CodeDom.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Convention.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Hosting.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Runtime.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.TypedParts.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Memory.Data.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjimswa.dswa.cache.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\bundle\QuanLyBenhXa.styles.css
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\projectbundle\QuanLyBenhXa.bundle.scp.css
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.json.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.development.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\swae.build.ex.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBe.3CE676CB.Up2Date
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\refint\QuanLyBenhXa.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.pdb
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.genruntimeconfig.cache
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\ref\QuanLyBenhXa.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
+D:\Doc\Syllabus\Assignment\MAS\OOP\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\appsettings.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.staticwebassets.runtime.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.staticwebassets.endpoints.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.exe
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.deps.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.runtimeconfig.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\QuanLyBenhXa.pdb
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.CodeDom.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Runtime.Caching.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.csproj.AssemblyReference.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.AssemblyInfoInputs.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.AssemblyInfo.cs
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.RazorAssemblyInfo.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.RazorAssemblyInfo.cs
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\bundle\QuanLyBenhXa.styles.css
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\scopedcss\projectbundle\QuanLyBenhXa.bundle.scp.css
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBe.3CE676CB.Up2Date
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\refint\QuanLyBenhXa.dll
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.pdb
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\QuanLyBenhXa.genruntimeconfig.cache
+C:\Users\Dell\Downloads\Program (1)\Program\QuanLyBenhXa\QuanLyBenhXa\obj\Debug\net8.0\ref\QuanLyBenhXa.dll

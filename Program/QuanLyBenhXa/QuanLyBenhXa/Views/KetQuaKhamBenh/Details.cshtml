@@ -1,0 +1,52 @@
+@model QuanLyBenhXa.Models.KetQuaKhamBenh
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Chi tiết kết quả khám";
+    var resultData = JsonSerializer.Deserialize<Dictionary<string, string>>(Model.KetQua ?? "{}");
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header bg-info text-white p-4 rounded-top-4">
+                    <h4 class="mb-0 fw-bold">Kết quả khám: @Model.TenPhongKham</h4>
+                    <p class="mb-0 mt-2 opacity-75">
+                        Bệnh nhân: <strong>@Model.HoSoKhamBenh?.BenhNhan?.HoTen</strong> - 
+                        Ngày khám: @Model.NgayKham.ToShortDateString()
+                    </p>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <h6 class="text-secondary text-uppercase fw-bold small">Thông tin chung</h6>
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4 text-muted">Bác sĩ thực hiện</dt>
+                            <dd class="col-sm-8 fw-semibold">@Model.BacSiThucHien</dd>
+                        </dl>
+                    </div>
+                    
+                    <h6 class="text-secondary text-uppercase fw-bold small border-bottom pb-2 mb-3">Chi tiết kết quả</h6>
+                    <dl class="row g-3">
+                        @if (resultData != null)
+                        {
+                            foreach (var item in resultData)
+                            {
+                                <dt class="col-sm-4 text-muted">@item.Key</dt>
+                                <dd class="col-sm-8">@item.Value</dd>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted fst-italic">Không có dữ liệu chi tiết.</p>
+                        }
+                    </dl>
+                    
+                    <div class="mt-4 text-center">
+                         <a asp-controller="BenhNhan" asp-action="Details" asp-route-id="@Model.HoSoKhamBenh?.BenhNhanId" class="btn btn-outline-secondary">Quay lại hồ sơ bệnh nhân</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

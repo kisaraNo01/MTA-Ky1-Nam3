@@ -1,0 +1,218 @@
+/* Global Overrides for "Thin Blue Line" Theme */
+/* Philosophy: White Backgrounds, Blue Borders/Text, No Rounded Corners, No Shadows. */
+
+:root {
+  --primary-blue: #0d6efd;
+  --primary-white: #ffffff;
+  --border-color: #dee2e6;
+  /* Standard gray for subtle borders */
+  --accent-blue-border: 1px solid var(--primary-blue);
+}
+
+/* 1. Global Reset: Square Edges */
+* {
+  border-radius: 0 !important;
+}
+
+/* 2. Typography & Base */
+/* 2. Typography & Base */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--primary-white);
+  color: #212529;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 60px;
+  /* Height of the footer */
+}
+
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 3. Buttons */
+/* "Blue for thin lines": Prefer outlines or simple solid blocks without depth. */
+.btn {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 0.5rem 1.5rem;
+  box-shadow: none !important;
+  border: 1px solid transparent;
+}
+
+/* Primary Button: Solid Blue is okay for CTAs, but keep it flat. */
+.btn-primary {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: var(--primary-white);
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+/* Outline Button: The preferred style for "thin lines". */
+.btn-outline-primary {
+  color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-blue);
+  color: var(--primary-white);
+}
+
+/* 4. Cards */
+/* Remove solid headers. Use borders. */
+.card {
+  border: 1px solid var(--border-color);
+  /* Light gray boundary */
+  border-top: 3px solid var(--primary-blue);
+  /* distinctive top blue line */
+  background-color: var(--primary-white);
+  box-shadow: none !important;
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: var(--primary-white) !important;
+  /* Force white */
+  color: var(--primary-blue) !important;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+}
+
+/* Override existing bg-primary headers if hardcoded */
+.card-header.bg-primary {
+  background-color: var(--primary-white) !important;
+  color: var(--primary-blue) !important;
+}
+
+/* 5. Navbar */
+.navbar {
+  background-color: var(--primary-white) !important;
+  border-bottom: 1px solid var(--primary-blue) !important;
+  box-shadow: none !important;
+}
+
+.navbar-brand {
+  color: var(--primary-blue) !important;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  color: #495057 !important;
+  font-weight: 500;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--primary-blue) !important;
+}
+
+/* 6. Tables */
+.table {
+  border-color: var(--border-color);
+}
+
+.table thead th {
+  background-color: var(--primary-white) !important;
+  color: var(--primary-blue);
+  border-bottom: 2px solid var(--primary-blue) !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* 7. Forms */
+.form-control,
+.form-select {
+  border: 1px solid #ced4da;
+  background-color: #f8f9fa;
+  /* Slight off-white input for contrast */
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-blue);
+  background-color: var(--primary-white);
+  box-shadow: none;
+  /* No glow, just border change */
+}
+
+.form-label {
+  color: var(--primary-blue);
+  /* Blue labels */
+  font-weight: 500;
+}
+
+/* 8. Text & Utilities */
+.text-primary {
+  color: var(--primary-blue) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-blue) !important;
+}
+
+/* Special utility for headers */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary-blue);
+}
+
+/* Badges: Outline style? */
+.badge {
+  color: var(--primary-blue);
+  background-color: transparent !important;
+  border: 1px solid var(--primary-blue);
+  font-weight: normal;
+}
+
+.badge.bg-success {
+  color: #198754;
+  border-color: #198754;
+}
+
+.badge.bg-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.badge.bg-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* Remove Bootstrap Shadows */
+/* 9. Layout Footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+  /* Vertically center the text */
+  background-color: var(--primary-white);
+  /* Prevent transparency overlap */
+  border-top: 1px solid var(--border-color);
+}

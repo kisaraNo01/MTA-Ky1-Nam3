@@ -1,0 +1,235 @@
+@model QuanLyBenhXa.Models.KetQuaKhamBenh
+
+@{
+    ViewData["Title"] = "Nhập kết quả khám: " + ViewBag.PhongKham;
+    string phongKham = ViewBag.PhongKham;
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card border-0">
+                <div class="card-header bg-white p-4">
+                    <h4 class="mb-0 fw-bold text-primary">Kết quả khám: @phongKham</h4>
+                    <div class="mt-3">
+                        <p class="mb-1 text-dark">Bệnh nhân: <strong class="fs-5 me-2">@ViewBag.BenhNhan?.HoTen</strong> 
+                           <span class="badge border-primary text-primary">@ViewBag.BenhNhan?.GioiTinh</span>
+                        </p>
+                        <p class="mb-1 small text-muted">Ngày sinh: @ViewBag.BenhNhan?.NgaySinh.ToShortDateString()</p>
+                        <p class="mb-0">Triệu chứng ban đầu: <strong class="text-danger">@ViewBag.TrieuChung</strong></p>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" name="HoSoKhamBenhId" value="@ViewBag.HoSoId" />
+                        <input type="hidden" name="TenPhongKham" value="@phongKham" />
+                        
+                        <div class="row g-3 mb-4">
+                            <h5 class="text-primary border-bottom pb-2">Thông tin chung</h5>
+                            <div class="col-md-6">
+                                <label asp-for="NgayKham" class="form-label fw-semibold text-secondary"></label>
+                                <input asp-for="NgayKham" class="form-control" />
+                                <span asp-validation-for="NgayKham" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label asp-for="BacSiThucHien" class="form-label fw-semibold text-secondary"></label>
+                                <select name="BacSiThucHien" class="form-select" asp-items="ViewBag.BacSiList">
+                                    <option value="">-- Chọn bác sĩ --</option>
+                                </select>
+                                <span asp-validation-for="BacSiThucHien" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- General Exam Results (Previous) - Hidden as per request -->
+                        @* 
+                        @if (ViewBag.KetQuaDaKhoa != null && phongKham != "Đa khoa")
+                        { 
+                             ... logic hidden ...
+                        }
+                        *@
+
+                        <div class="d-flex justify-content-end mb-3">
+                             <button type="button" id="btnDemoDevice" class="btn btn-outline-success btn-sm border">
+                                <i class="bi bi-cpu"></i> Lấy số liệu từ thiết bị (Demo)
+                            </button>
+                        </div>
+                        
+                        <h5 class="text-primary border-bottom pb-2 mb-3">Kết quả chi tiết</h5>
+                        
+                        @if (phongKham == "Đa khoa")
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">Mạch (lần/phút)</label>
+                                    <input type="number" name="Mach" class="form-control" placeholder="Ví dụ: 80" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Huyết áp (mmHg)</label>
+                                    <input type="text" name="HuyetAp" class="form-control" placeholder="Ví dụ: 120/80" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Chiều cao (cm)</label>
+                                    <input type="number" name="ChieuCao" class="form-control" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Cân nặng (kg)</label>
+                                    <input type="number" name="CanNang" class="form-control" />
+                                </div>
+                                 <div class="col-12">
+                                    <label class="form-label">Toàn thân</label>
+                                    <textarea name="ToanThan" class="form-control" rows="2"></textarea>
+                                </div>
+                                
+                                <!-- Removed 'Chỉ định khám thêm' as per new requirement: General Doctor sends to Attending Doctor -->
+                            </div>
+                        }
+                        else if (phongKham == "Tim mạch")
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nhịp tim (lần/phút)</label>
+                                    <input type="number" name="NhipTim" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Điện tâm đồ</label>
+                                    <input type="text" name="DienTamDo" class="form-control" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Mô tả tim mạch</label>
+                                    <textarea name="MoTaTimMach" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        }
+                        else if (phongKham == "Da liễu")
+                        {
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Tình trạng da</label>
+                                    <input type="text" name="TinhTrangDa" class="form-control" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Mô tả tổn thương</label>
+                                    <textarea name="ThuongTon" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                        }
+                         else if (phongKham == "Xét nghiệm")
+                        {
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Nhóm máu</label>
+                                     <select name="NhomMau" class="form-select">
+                                        <option value="">-- Chọn --</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="AB">AB</option>
+                                        <option value="O">O</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Hồng cầu</label>
+                                    <input type="text" name="HongCau" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Bạch cầu</label>
+                                    <input type="text" name="BachCau" class="form-control" />
+                                </div>
+                                 <div class="col-12">
+                                    <label class="form-label">Kết luận xét nghiệm</label>
+                                    <textarea name="KetLuanXN" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                        }
+                        else if (phongKham == "Siêu âm")
+                        {
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Vị trí siêu âm</label>
+                                    <input type="text" name="ViTriSieuAm" class="form-control" placeholder="Ví dụ: Ổ bụng, Tim..." />
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Mô tả hình ảnh</label>
+                                    <textarea name="MoTaHinhAnh" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Kết luận siêu âm</label>
+                                    <textarea name="KetLuanSA" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                             <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Ghi chú / Kết quả</label>
+                                    <textarea name="GhiChuKhac" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                             @* Assuming we go back to patient details since we don't have HSKB details view yet linked *@
+                             <a href="javascript:history.back()" class="btn btn-light border">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-primary px-4">Lưu kết quả</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        document.getElementById('btnDemoDevice').addEventListener('click', function() {
+            // Encode value to ensure no special char breakage
+            var clinicType = "@Html.Raw(phongKham)";
+            
+            // Helper for random int
+            function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+            function setVal(name, val) {
+                var el = document.querySelector('[name="' + name + '"]');
+                if (el) el.value = val;
+                else console.warn("Element not found: " + name);
+            }
+            
+            console.log("Fill Demo Data for: " + clinicType);
+
+            if (clinicType === 'Đa khoa') {
+                setVal('Mach', rand(60, 100));
+                setVal('HuyetAp', rand(110, 140) + '/' + rand(70, 90));
+                setVal('ChieuCao', rand(150, 180));
+                setVal('CanNang', rand(45, 85));
+                setVal('ToanThan', "Thể trạng bình thường, da niêm hồng.");
+            }
+            else if (clinicType === 'Tim mạch') {
+                setVal('NhipTim', rand(60, 100));
+                setVal('DienTamDo', "Nhịp xoang đều, tần số " + rand(60, 90) + " ck/p");
+                setVal('MoTaTimMach', "T1, T2 đều rõ, không nghe tiếng thổi bệnh lý.");
+            }
+            else if (clinicType === 'Da liễu') {
+                setVal('TinhTrangDa', "Viêm da cơ địa");
+                setVal('ThuongTon', "Mảng hồng ban rải rác vùng lưng và cánh tay, có mụn nước nhỏ.");
+            }
+            else if (clinicType === 'Xét nghiệm') {
+                var bloodTypes = ['A', 'B', 'AB', 'O'];
+                setVal('NhomMau', bloodTypes[rand(0, 3)]);
+                setVal('HongCau', (rand(380, 550) / 100).toFixed(2) + " T/l");
+                setVal('BachCau', (rand(40, 100) / 10).toFixed(1) + " G/l");
+                setVal('KetLuanXN', "Các chỉ số huyết học trong giới hạn bình thường.");
+            }
+            else if (clinicType === 'Siêu âm') {
+                setVal('ViTriSieuAm', "Ổ bụng tổng quát");
+                setVal('MoTaHinhAnh', "Gan: Kích thước bình thường, nhu mô đều. Mật: Túi mật không sỏi. Thận: Không ứ nước.");
+                setVal('KetLuanSA', "Hiện tại chưa phát hiện bất thường trên siêu âm.");
+            }
+            else {
+                setVal('GhiChuKhac', "Kết quả kiểm tra bình thường.");
+            }
+        });
+    </script>
+}

@@ -1,0 +1,144 @@
+@model QuanLyBenhXa.Controllers.InvoiceViewModel
+
+@{
+    ViewData["Title"] = "Hóa đơn thanh toán";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-success text-white p-4 rounded-top-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0 fw-bold">Hóa đơn thanh toán</h4>
+                        <span class="badge bg-white text-success fs-6">HS #@Model.HoSo.Id</span>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Patient Info -->
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <h6 class="text-muted fw-bold text-uppercase small">Bệnh nhân</h6>
+                            <h5 class="fw-bold text-primary">@Model.HoSo.BenhNhan?.HoTen</h5>
+                            <p class="mb-0 text-secondary">Ngày khám: @Model.HoSo.NgayKham.ToShortDateString()</p>
+                        </div>
+                        <div class="col-sm-6 text-sm-end">
+                            <h6 class="text-muted fw-bold text-uppercase small">Bác sĩ phụ trách</h6>
+                            <p class="fw-bold mb-0">@Model.HoSo.BacSiPhuTrach</p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Exam Fees -->
+                    <h6 class="fw-bold text-secondary mb-3"><i class="bi bi-activity me-2"></i>Chi phí khám chữa bệnh</h6>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                @foreach (var fee in Model.ExamFees)
+                                {
+                                    <tr>
+                                        <td>@fee.Name</td>
+                                        <td class="text-end">@fee.Amount.ToString("N0") VNĐ</td>
+                                    </tr>
+                                }
+                                <tr class="border-top">
+                                    <td class="fw-bold text-end">Tổng khám:</td>
+                                    <td class="fw-bold text-end">@Model.TotalExamFee.ToString("N0") VNĐ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Medicine Cost -->
+                    <h6 class="fw-bold text-secondary mb-3"><i class="bi bi-capsule me-2"></i>Chi phí thuốc</h6>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                @foreach (var item in Model.MedicineCosts)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td class="text-end">@item.Amount.ToString("N0") VNĐ</td>
+                                    </tr>
+                                }
+                                <tr class="border-top">
+                                    <td class="fw-bold text-end">Tổng thuốc:</td>
+                                    <td class="fw-bold text-end">@Model.TotalMedicineCost.ToString("N0") VNĐ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="border-2" />
+                    
+                    <!-- Total -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="fw-bold text-dark">Tổng thanh toán:</h4>
+                        <div class="text-end">
+                            @if (Model.IsFree)
+                            {
+                                <h3 class="fw-bold text-success">0 VNĐ</h3>
+                                <div class="badge bg-success">Miễn phí (BHYT Quân nhân)</div>
+                            }
+                            else
+                            {
+                                <h3 class="fw-bold text-danger">@Model.TotalAmount.ToString("N0") VNĐ</h3>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Demo -->
+                     @if (!Model.IsFree)
+                    {
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-secondary mb-3">Hình thức thanh toán:</h6>
+                            <div class="d-flex gap-3 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="payCash" value="cash" checked onchange="toggleQR(false)">
+                                    <label class="form-check-label" for="payCash">
+                                        <i class="bi bi-cash-stack me-1"></i> Tiền mặt
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="payBank" value="bank" onchange="toggleQR(true)">
+                                    <label class="form-check-label" for="payBank">
+                                        <i class="bi bi-qr-code-scan me-1"></i> Chuyển khoản ngân hàng
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div id="qrSection" class="text-center p-3 bg-light rounded border d-none">
+                                <p class="mb-2 fw-bold text-primary">Quét mã để thanh toán:</p>
+                                <!-- Demo QR Code (Placeholder) -->
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=DemoPayment_@Model.HoSo.Id" alt="QR Code" class="img-fluid border p-1 bg-white" />
+                                <p class="small text-muted mt-2">Nội dung: THANHTOAN HS @Model.HoSo.Id</p>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Actions -->
+                    <form asp-action="Confirm">
+                        <input type="hidden" name="id" value="@Model.HoSo.Id" />
+                        <input type="hidden" name="totalAmount" value="@Model.TotalAmount" />
+                        
+                        <script>
+                            function toggleQR(show) {
+                                var qr = document.getElementById('qrSection');
+                                if (show) qr.classList.remove('d-none');
+                                else qr.classList.add('d-none');
+                            }
+                        </script>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold" onclick="return confirm('Xác nhận thanh toán hóa đơn này?');">
+                                <i class="bi bi-check-circle-fill me-2"></i> Xác nhận đã thanh toán
+                            </button>
+                            <a asp-action="Index" class="btn btn-light border">Quay lại danh sách</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
