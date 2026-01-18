@@ -1,0 +1,265 @@
+﻿@model IEnumerable<SHOESTKC.CSDL.SanPham>
+
+@{
+    ViewData["Title"] = ViewBag.DanhMuc.TenDanhMuc;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int startIndex = (ViewBag.CurrentPage - 1) * ViewBag.PageSize + 1;
+}
+
+<div class="container my-5">
+    <!-- Header danh mục -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">@ViewBag.DanhMuc.TenDanhMuc</li>
+                </ol>
+            </nav>
+            <h2>@ViewBag.DanhMuc.TenDanhMuc</h2>
+            <p class="text-muted">@ViewBag.DanhMuc.MoTa</p>
+        </div>
+    </div>
+
+    <!-- Bộ lọc -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Tìm kiếm</label>
+                        <input type="text" name="keyword" class="form-control" placeholder="Tên sản phẩm..." value="@ViewBag.Keyword">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Giá từ (VNĐ)</label>
+                        <input type="number" name="giaMin" class="form-control" placeholder="0" value="@ViewBag.GiaMin" min="0" step="1000">
+                        <small class="price-input-helper">
+                            <i class="fas fa-info-circle"></i> Ví dụ: 100000, 500000
+                        </small>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Giá đến (VNĐ)</label>
+                        <input type="number" name="giaMax" class="form-control" placeholder="10,000,000" value="@ViewBag.GiaMax" min="0" step="1000">
+                        <small class="price-input-helper">
+                            <i class="fas fa-info-circle"></i> Ví dụ: 1000000, 5000000
+                        </small>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search"></i> Lọc
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thông báo kết quả tìm kiếm -->
+    @if (!string.IsNullOrEmpty(ViewBag.Keyword) || ViewBag.GiaMin != null || ViewBag.GiaMax != null)
+    {
+        <div class="alert alert-info border-0 shadow-sm mb-3">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-2"></i>
+                <div>
+                    <strong>Kết quả tìm kiếm: @ViewBag.TotalItems sản phẩm</strong>
+                    <div class="mt-1">
+                        @if (!string.IsNullOrEmpty(ViewBag.Keyword))
+                        {
+                            <span class="badge bg-primary me-1">
+                                <i class="fas fa-search"></i> "@ViewBag.Keyword"
+                            </span>
+                        }
+                        @if (ViewBag.GiaMin != null || ViewBag.GiaMax != null)
+                        {
+                            <span class="badge bg-success me-1">
+                                <i class="fas fa-tag"></i> @(ViewBag.GiaMin?.ToString("N0") ?? "0") - @(ViewBag.GiaMax?.ToString("N0") ?? "∞") VNĐ
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Sắp xếp -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            Tìm thấy <strong>@ViewBag.TotalItems</strong> sản phẩm
+        </div>
+        <div class="btn-group" role="group">
+            <a href="?SortBy=&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax"
+               class="btn btn-sm @(string.IsNullOrEmpty(ViewBag.SortBy) ? "btn-primary" : "btn-outline-primary")">
+                Mới nhất
+            </a>
+            <a href="?SortBy=price_asc&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax"
+               class="btn btn-sm @(ViewBag.SortBy == "price_asc" ? "btn-primary" : "btn-outline-primary")">
+                Giá tăng dần
+            </a>
+            <a href="?SortBy=price_desc&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax"
+               class="btn btn-sm @(ViewBag.SortBy == "price_desc" ? "btn-primary" : "btn-outline-primary")">
+                Giá giảm dần
+            </a>
+        </div>
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 product-card">
+                        <a asp-action="Chitiet" asp-route-id="@item.Id" class="text-decoration-none">
+                            @if (!string.IsNullOrEmpty(item.AnhChinh))
+                            {
+                                <img src="@item.AnhChinh" class="card-img-top" alt="@item.TenSanPham"
+                                     style="height: 250px; object-fit: cover;" onerror="this.src='/images/no-image.jpg'" />
+                            }
+                            else
+                            {
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                </div>
+                            }
+                            <div class="card-body">
+                                <span class="badge bg-info mb-2">@item.DanhMuc?.TenDanhMuc</span>
+                                <h6 class="card-title">@item.TenSanPham</h6>
+                                <p class="text-muted small mb-2">@item.Hang</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">@item.GiaGoc.ToString("N0")đ</span>
+                                    <span class="badge bg-secondary">@item.BienThe?.Count biên thể</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-primary btn-sm w-100" onclick="addToCart(@item.BienThe?.FirstOrDefault()?.Id)">
+                                <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Phân trang -->
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax&SortBy=@ViewBag.SortBy">
+                            Trước
+                        </a>
+                    </li>
+
+                    @{
+                        int startPage = Math.Max(1, ViewBag.CurrentPage - 2);
+                        int endPage = Math.Min(ViewBag.TotalPages, ViewBag.CurrentPage + 2);
+                    }
+
+                    @if (startPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax&SortBy=@ViewBag.SortBy">1</a>
+                        </li>
+                        @if (startPage > 2)
+                        {
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        }
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="?page=@i&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax&SortBy=@ViewBag.SortBy">@i</a>
+                        </li>
+                    }
+
+                    @if (endPage < ViewBag.TotalPages)
+                    {
+                        @if (endPage < ViewBag.TotalPages - 1)
+                        {
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        }
+                        <li class="page-item">
+                            <a class="page-link" href="?page=@ViewBag.TotalPages&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax&SortBy=@ViewBag.SortBy">@ViewBag.TotalPages</a>
+                        </li>
+                    }
+
+                    <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)&keyword=@ViewBag.Keyword&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax&SortBy=@ViewBag.SortBy">
+                            Sau
+                        </a>
+                    </li>
+                </ul>
+                <p class="text-center text-muted">
+                    Hiển thị @startIndex - @Math.Min(startIndex + ViewBag.PageSize - 1, ViewBag.TotalItems)
+                    trong tổng số @ViewBag.TotalItems sản phẩm
+                </p>
+            </nav>
+        }
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+            <h5>Không tìm thấy sản phẩm nào</h5>
+            <p class="text-muted">Vui lòng thử lại với bộ lọc khác</p>
+        </div>
+    }
+</div>
+
+<style>
+    .product-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+</style>
+
+@section Scripts {
+    <script>
+        function addToCart(bienTheId) {
+            if (!bienTheId) {
+                alert('Sản phẩm chưa có phiên bản!');
+                return;
+            }
+
+            fetch('/GioHang/Add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ bienTheId: bienTheId, SoLuong: 1 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    if (data.cartCount) {
+                        const cartBadge = document.querySelector('.cart-badge');
+                        if (cartBadge) {
+                            cartBadge.textContent = data.cartCount;
+                        }
+                    }
+                } else {
+                    if (data.requireLogin) {
+                        if (confirm(data.message)) {
+                            window.location.href = '/Auth/Login';
+                        }
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            })
+            .catch(error => {
+                alert('Có lỗi xảy ra!');
+                console.error('Error:', error);
+            });
+        }
+    </script>
+}

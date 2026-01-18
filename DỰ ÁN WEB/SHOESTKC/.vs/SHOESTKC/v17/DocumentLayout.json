@@ -1,0 +1,92 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|d:\\codetao\\shoesproject\\shoestkc\\shoestkc\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|solutionrelative:shoestkc\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|d:\\codetao\\shoesproject\\shoestkc\\shoestkc\\views\\order\\myorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|solutionrelative:shoestkc\\views\\order\\myorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|d:\\codetao\\shoesproject\\shoestkc\\shoestkc\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|solutionrelative:shoestkc\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|d:\\codetao\\shoesproject\\shoestkc\\shoestkc\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1B9D298A-4A33-4C4A-A901-2BC63D210875}|SHOESTKC\\SHOESTKC.csproj|solutionrelative:shoestkc\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GioHangController.cs",
+              "DocumentMoniker": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Controllers\\GioHangController.cs",
+              "RelativeDocumentMoniker": "SHOESTKC\\Controllers\\GioHangController.cs",
+              "ToolTip": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Controllers\\GioHangController.cs",
+              "RelativeToolTip": "SHOESTKC\\Controllers\\GioHangController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAADAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-30T01:12:17.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MyOrders.cshtml",
+              "DocumentMoniker": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Order\\MyOrders.cshtml",
+              "RelativeDocumentMoniker": "SHOESTKC\\Views\\Order\\MyOrders.cshtml",
+              "ToolTip": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Order\\MyOrders.cshtml",
+              "RelativeToolTip": "SHOESTKC\\Views\\Order\\MyOrders.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-30T01:11:57.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Auth\\Register.cshtml",
+              "RelativeDocumentMoniker": "SHOESTKC\\Views\\Auth\\Register.cshtml",
+              "ToolTip": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Auth\\Register.cshtml",
+              "RelativeToolTip": "SHOESTKC\\Views\\Auth\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-30T01:00:56.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "SHOESTKC\\Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "D:\\CodeTao\\SHOESPROJECT\\SHOESTKC\\SHOESTKC\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "SHOESTKC\\Views\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-30T01:00:26.43Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

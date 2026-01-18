@@ -1,0 +1,176 @@
+﻿@model IEnumerable<SHOESTKC.CSDL.NguoiDung>
+
+@{
+    ViewData["Title"] = "Quản lý khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int stt = (ViewBag.PageStartIndex ?? 0) + 1;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-users"></i> Quản lý khách hàng</h2>
+        <a asp-action="Create" asp-controller="KhachHang" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> Thêm khách hàng
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <form asp-action="Index" asp-controller="KhachHang" method="get" class="row g-3">
+                <div class="col-md-10">
+                    <label class="form-label">
+                        Tìm kiếm theo tên, email, số điện thoại...
+                    </label>
+                    <input type="text"
+                           name="search"
+                           class="form-control"
+                           placeholder="Nhập từ khóa tìm kiếm"
+                           value="@ViewBag.Search" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thông báo kết quả tìm kiếm -->
+    @if (!string.IsNullOrEmpty(ViewBag.Search))
+    {
+        <div class="alert alert-info border-0 shadow-sm mb-3">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-2"></i>
+                <div>
+                    <strong>Kết quả tìm kiếm: @(ViewBag.TotalItems ?? 0) khách hàng</strong>
+                    <div class="mt-1">
+                        <span class="badge bg-primary me-1">
+                            <i class="fas fa-search"></i> "@ViewBag.Search"
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Ngày tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><strong>@stt</strong></td>
+                                    <td><strong>@item.HoTen</strong></td>
+                                    <td>@item.Email</td>
+                                    <td>
+                                        @(string.IsNullOrEmpty(item.SoDienThoai)
+                                                                        ? "—"
+                                                                        : item.SoDienThoai)
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.DiaChi))
+                                        {
+                                            @(item.DiaChi.Length > 50
+                                                                            ? item.DiaChi.Substring(0, 50) + "..."
+                                                                            : item.DiaChi)
+                                                                }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <td>@item.NgayTao?.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <a asp-action="Details"
+                                           asp-controller="KhachHang"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-info"
+                                           title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                stt++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">
+                                    <i class="fas fa-user-slash fa-3x mb-2"></i>
+                                    <p>Không tìm thấy khách hàng nào</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (ViewBag.TotalPages > 1)
+            {
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage - 1)&search=@ViewBag.Search">
+                                Trước
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link"
+                                   href="?page=@i&search=@ViewBag.Search">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage + 1)&search=@ViewBag.Search">
+                                Sau
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="text-center text-muted">
+                        Hiển thị trang @ViewBag.CurrentPage / @ViewBag.TotalPages –
+                        tổng @ViewBag.TotalItems khách hàng
+                    </p>
+                </nav>
+            }
+        </div>
+    </div>
+</div>

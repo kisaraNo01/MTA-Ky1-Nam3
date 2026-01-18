@@ -1,0 +1,290 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using static Microsoft.EntityFrameworkCore.DbLoggerCategory
+@model IEnumerable<SHOESTKC.CSDL.SanPham>
+
+@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    // Tính toán Số thứ tự (STT) dựa trên phân trang
+    int stt = ((ViewBag.PageStart as int? ?? 0) + 1);
+
+    // Ensure lPages and lItems are defined for pagination
+    int lPages = ViewBag.TotPages ?? 1;
+    int lItems = ViewBag.TotItems ?? 0;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-box"></i> Quản lý Sản phẩm</h2>
+        <a asp-action="ThemSanPham" asp-controller="Admin" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm Sản phẩm
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form asp-action="SanPham" asp-controller="Admin" method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Tìm kiếm</label>
+                    <input type="text" name="search" class="form-control"
+                           placeholder="Tên sản phẩm, hãng, mô tả..."
+                           value="@ViewBag.Search">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Danh mục</label>
+                    <select name="danhmucId" class="form-select" asp-items="ViewBag.Danhmucs">
+                        <option value="">-- tất cả danh mục --</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Giá từ (VNĐ)</label>
+                    <input type="number" name="giaMin" class="form-control"
+                           placeholder="0" value="@ViewBag.GiaMin" min="0" step="1000">
+                    <small class="price-input-helper">
+                        <i class="fas fa-info-circle"></i> Ví dụ: 100000
+                    </small>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Giá đến (VNĐ)</label>
+                    <input type="number" name="giaMax" class="form-control"
+                           placeholder="10,000,000" value="@ViewBag.GiaMax" min="0" step="1000">
+                    <small class="price-input-helper">
+                        <i class="fas fa-info-circle"></i> Ví dụ: 5000000
+                    </small>
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thông báo kết quả tìm kiếm -->
+    @if (!string.IsNullOrEmpty(ViewBag.Search) || ViewBag.DanhmucId != null || ViewBag.GiaMin != null || ViewBag.GiaMax != null)
+    {
+        <div class="alert alert-info border-0 shadow-sm mb-3">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-2"></i>
+                <div>
+                    <strong>Kết quả tìm kiếm: @(ViewBag.TotItems ?? 0) sản phẩm</strong>
+                    <div class="mt-1">
+                        @if (!string.IsNullOrEmpty(ViewBag.Search))
+                        {
+                            <span class="badge bg-primary me-1">
+                                <i class="fas fa-search"></i> "@ViewBag.Search"
+                            </span>
+                        }
+                        @if (ViewBag.DanhmucId != null && ViewBag.Danhmucs != null)
+                        {
+                            var dmSelected = (ViewBag.Danhmucs as Microsoft.AspNetCore.Mvc.Rendering.SelectList)?.FirstOrDefault(dm => dm.Value == ViewBag.DanhmucId.ToString());
+                            if (dmSelected != null)
+                            {
+                                <span class="badge bg-secondary me-1">
+                                    <i class="fas fa-folder"></i> @dmSelected.Text
+                                </span>
+                            }
+                        }
+                        @if (ViewBag.GiaMin != null || ViewBag.GiaMax != null)
+                        {
+                            <span class="badge bg-success me-1">
+                                <i class="fas fa-tag"></i> @(ViewBag.GiaMin?.ToString("N0") ?? "0") - @(ViewBag.GiaMax?.ToString("N0") ?? "∞") VNĐ
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Ảnh</th>
+                            <th>Tên Sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Hãng</th>
+                            <th>Giá gốc</th>
+                            <th>Phiên bản</th>
+                            <th>Trạng thái</th>
+                            <th style="width:150px;">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><strong>@stt</strong></td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.AnhChinh))
+                                        {
+                                            <img src="@item.AnhChinh"
+                                                 alt="@item.TenSanPham"
+                                                 style="width:50px;height:50px;object-fit:cover;border-radius:5px;" />
+                                        }
+                                        else
+                                        {
+                                            <div style="width:50px;height:50px;background:#ddd;border-radius:5px;
+                                                            display:flex;align-items:center;justify-content:center;">
+                                                <i class="fas fa-image text-muted"></i>
+                                            </div>
+                                        }
+                                </td>
+                                <td>
+                                    <strong>@item.TenSanPham</strong><br />
+                                    <small class="text-muted">
+                                        @(item.MoTa?.Length > 50
+                                                                            ? item.MoTa.Substring(0, 50) + "..."
+                                                                            : item.MoTa)
+                                </small>
+                            </td>
+                            <td>@item.DanhMuc?.TenDanhMuc</td>
+                            <td>@item.Hang</td>
+                            <td><strong>@item.GiaGoc.ToString("N0") đ</strong></td>
+                            <td>
+                                <span class="badge bg-info">
+                                    @(item.BienThe?.Count ?? 0) phiên bản
+                                </span>
+                            </td>
+                            <td>
+                                @if (item.TrangThai == true)
+                                        {
+                                            <span class="badge bg-success">Hiển thị</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Ẩn</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/ChiTietSanPham/@item.Id"
+                                           class="btn btn-sm btn-info" title="Chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-controller="Admin"
+                                           asp-action="SuaSanPham"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-warning"
+                                           title="Sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button onclick="deleteSanPham(@item.Id, '@(item.TrangThai == true ? "true" : "false")')"
+                                                class="btn btn-sm btn-danger"
+                                                title="Xóa / Ẩn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                stt++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center text-muted py-4">
+                                    Không tìm thấy sản phẩm nào phù hợp.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (lPages > 1)
+            {
+                <nav class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage - 1)&search=@ViewBag.Search&danhmucId=@ViewBag.DanhmucId&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax">
+                                Trước
+                            </a>
+                        </li>
+
+                        @for (int i = 1; i <= lPages; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link"
+                                   href="?page=@i&search=@ViewBag.Search&danhmucId=@ViewBag.DanhmucId&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax">
+                                    @i
+                                </a>
+                            </li>
+                        }
+
+                        <li class="page-item @(ViewBag.CurrentPage == lPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage + 1)&search=@ViewBag.Search&danhmucId=@ViewBag.DanhmucId&giaMin=@ViewBag.GiaMin&giaMax=@ViewBag.GiaMax">
+                                Sau
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="text-center text-muted small">
+                        Hiển thị trang @ViewBag.CurrentPage / @lPages –
+                        tổng @lItems sản phẩm
+                    </p>
+                </nav>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteSanPham(id, currentStatus) {
+            var confirmMessage = "";
+
+            if (currentStatus === "true") {
+                confirmMessage =
+                    "Sản phẩm đang hiển thị.\n" +
+                    "Bạn có muốn ẨN (Soft Delete) sản phẩm này không?";
+            } else {
+                confirmMessage =
+                    "CẢNH BÁO QUAN TRỌNG:\n" +
+                    "Sản phẩm này đã bị ẨN.\n\n" +
+                    "Hành động này sẽ XÓA VĨNH VIỄN khỏi CSDL.\n" +
+                    "Bạn có chắc chắn muốn tiếp tục?";
+            }
+
+            if (confirm(confirmMessage)) {
+                fetch('/Admin/XoaSanPham?id=' + id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.success) location.reload();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Có lỗi xảy ra khi kết nối đến server.');
+                });
+            }
+        }
+    </script>
+}

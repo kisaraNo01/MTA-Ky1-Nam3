@@ -1,0 +1,101 @@
+﻿@model SHOESTKC.CSDL.MauSac
+@{
+    ViewData["Title"] = "Xóa Màu Sắc";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h2><i class="fas fa-trash-alt text-danger"></i> Xóa Màu Sắc</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Quản lý Màu Sắc</a></li>
+                    <li class="breadcrumb-item active">Xóa: @Model.TenMau</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Xác Nhận Xóa</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5><i class="fas fa-exclamation-circle"></i> Cảnh báo!</h5>
+                        <p class="mb-0">Bạn có chắc chắn muốn xóa màu sắc này không? Hành động này không thể hoàn tác!</p>
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Tên Màu:</dt>
+                        <dd class="col-sm-9"><strong class="text-primary">@Model.TenMau</strong></dd>
+
+                        <dt class="col-sm-3">Mã Hex:</dt>
+                        <dd class="col-sm-9">
+                            <code>@Model.MaHex</code>
+                            <div style="width: 50px; height: 50px; background-color: @Model.MaHex; border: 1px solid #ddd; border-radius: 4px; display: inline-block; margin-left: 10px;"></div>
+                        </dd>
+
+                        <dt class="col-sm-3">Trạng Thái:</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.TrangThai == true)
+                            {
+                                <span class="badge bg-success">Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Ngừng</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">Số Biến Thể:</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge bg-info">@Model.BienThe.Count</span>
+                        </dd>
+
+                        <dt class="col-sm-3">Ngày Tạo:</dt>
+                        <dd class="col-sm-9">@Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")</dd>
+                    </dl>
+
+                    @if (Model.BienThe.Count > 0)
+                    {
+                        <div class="alert alert-danger">
+                            <h6><i class="fas fa-ban"></i> Không thể xóa!</h6>
+                            <p class="mb-0">
+                                Màu sắc này đang được sử dụng bởi <strong>@Model.BienThe.Count</strong> biến thể sản phẩm.
+                                Vui lòng xóa hoặc chuyển các biến thể sang màu khác trước khi xóa màu này.
+                            </p>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-arrow-left"></i> Quay Lại
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> Màu sắc này chưa được sử dụng, có thể xóa an toàn.
+                        </div>
+
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a asp-action="Index" class="btn btn-secondary">
+                                    <i class="fas fa-times"></i> Hủy
+                                </a>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Xác Nhận Xóa
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

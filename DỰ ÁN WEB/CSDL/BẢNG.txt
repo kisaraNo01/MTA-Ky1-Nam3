@@ -1,0 +1,9 @@
+NguoiDung (Users) - Khách hàng & Admin
+DanhMuc (Categories) - 6 loại giày
+SanPham (Products) - Sản phẩm 
+BienThe (Variants) - Size & Màu
+GioHang (Cart) - Giỏ hàng
+MaKhuyenMai (Vouchers) - Mã giảm giá
+DonHang (Orders) - Đơn hàng
+ChiTietDonHang (Order Items) - Chi tiết đơn
+DanhGia (Reviews) - Đánh giá

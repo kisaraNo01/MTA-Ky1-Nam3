@@ -1,0 +1,161 @@
+﻿@using SHOESTKC.CSDL
+@model DonHang
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between mb-4">
+    <h2>Chi tiết đơn hàng #@Model.MaDonHang</h2>
+    <a href="/Admin/DatHang" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Thông tin đơn hàng</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th width="200">Khách hàng:</th>
+                        <td>@Model.NguoiDung?.HoTen</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại:</th>
+                        <td>@Model.SoDienThoai</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ giao:</th>
+                        <td>@Model.DiaChiGiao</td>
+                    </tr>
+                    <tr>
+                        <th>Phương thức TT:</th>
+                        <td>@Model.PhuongThucThanhToan</td>
+                    </tr>
+                    <tr>
+                        <th>Ngày tạo:</th>
+                        <td>@(Model.NgayTao.HasValue? Model.NgayTao.Value.ToString("dd/MM/yyyy HH:mm") : "")</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Sản phẩm</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>SL</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ChiTietDonHang)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@(item.BienThe?.SanPham?.AnhChinh ?? "/images/no-image.jpg")"
+                                         style="width:50px;height:50px;object-fit:cover"
+                                         class="me-2" />
+                                    @item.BienThe?.SanPham?.TenSanPham<br />
+                                    <small class="text-muted">
+                                        Size: @item.BienThe?.Size |
+                                        Màu: @item.BienThe?.MauSac
+                                    </small>
+                                </td>
+                                <td>@item.DonGia.ToString("N0") đ</td>
+                                <td>@item.SoLuong</td>
+                                <td>@item.ThanhTien.ToString("N0") đ</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Tổng kết</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Tạm tính:</td>
+                        <td class="text-end">@Model.TamTinh.ToString("N0") đ</td>
+                    </tr>
+                    <tr>
+                        <td>Giảm giá:</td>
+                        <td class="text-end text-danger">
+                            -@((Model.TienGiam ?? 0m).ToString("N0")) đ
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phí vận chuyển:</td>
+                        <td class="text-end">
+                            @((Model.PhiVanChuyen ?? 0m).ToString("N0")) đ
+                        </td>
+                    </tr>
+                    <tr class="border-top">
+                        <th>Tổng cộng:</th>
+                        <th class="text-end text-primary">
+                            @Model.TongTien.ToString("N0") đ
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Cập nhật trạng thái</h5>
+            </div>
+            <div class="card-body">
+                <form id="updateStatusForm" method="post" action="/Admin/UpdateOrderStatus">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái đơn hàng</label>
+                        <select name="status" class="form-select">
+                            <option value="Chờ xác nhận" selected="@(Model.TrangThaiDonHang == "Chờ xác nhận")">Chờ xác nhận</option>
+                            <option value="Đã xác nhận" selected="@(Model.TrangThaiDonHang == "Đã xác nhận")">Đã xác nhận</option>
+                            <option value="Đang giao" selected="@(Model.TrangThaiDonHang == "Đang giao")">Đang giao</option>
+                            <option value="Đã giao" selected="@(Model.TrangThaiDonHang == "Đã giao")">Đã giao</option>
+                            <option value="Đã hủy" selected="@(Model.TrangThaiDonHang == "Đã hủy")">Đã hủy</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="document.getElementById('updateStatusForm').submit();" class="btn btn-primary w-100" style="position: relative; z-index: 1000;">
+                        <i class="fas fa-save"></i> Cập nhật
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

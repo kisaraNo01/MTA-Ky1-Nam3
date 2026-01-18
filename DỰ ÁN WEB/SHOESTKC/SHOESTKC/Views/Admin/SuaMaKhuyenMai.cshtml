@@ -1,0 +1,140 @@
+﻿@model SHOESTKC.CSDL.MaKhuyenMai
+
+@{
+    ViewData["Title"] = "Sửa mã khuyến mãi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-edit"></i> Sửa mã khuyến mãi: @Model.MaCode</h2>
+        <a asp-action="Index" asp-controller="MaKhuyenMai" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Edit" asp-controller="MaKhuyenMai" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="NgayTao" />
+                        <input type="hidden" asp-for="SoLanDaDung" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MaCode" class="form-label">
+                                    Mã code <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="MaCode" class="form-control" required />
+                                <span asp-validation-for="MaCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LoaiKm" class="form-label">
+                                    Loại khuyến mãi <span class="text-danger">*</span>
+                                </label>
+                                <select asp-for="LoaiKm" class="form-select" required>
+                                    <option value="phan_tram">Giảm theo phần trăm</option>
+                                    <option value="mien_phi_ship">Miễn phí ship</option>
+                                </select>
+                                <span asp-validation-for="LoaiKm" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="GiaTriGiam" class="form-label">
+                                    Giá trị giảm <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="GiaTriGiam" type="number" class="form-control" required />
+                                <small class="form-text text-muted">
+                                    Nhập % nếu giảm theo phần trăm, hoặc số tiền nếu miễn phí ship
+                                </small>
+                                <span asp-validation-for="GiaTriGiam" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="GiaTriDonToiThieu" class="form-label">
+                                    Giá trị đơn tối thiểu (VNĐ)
+                                </label>
+                                <input asp-for="GiaTriDonToiThieu" type="number" class="form-control" />
+                                <span asp-validation-for="GiaTriDonToiThieu" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SoLanDungToiDa" class="form-label">
+                                Số lần dùng tối đa
+                            </label>
+                            <input asp-for="SoLanDungToiDa" type="number" class="form-control" />
+                            <small class="form-text text-muted">
+                                Đã sử dụng: @Model.SoLanDaDung lần
+                            </small>
+                            <span asp-validation-for="SoLanDungToiDa" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NgayBatDau" class="form-label">
+                                    Ngày bắt đầu <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="NgayBatDau" type="datetime-local" class="form-control" required />
+                                <span asp-validation-for="NgayBatDau" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NgayKetThuc" class="form-label">
+                                    Ngày kết thúc <span class="text-danger">*</span>
+                                </label>
+                                <input asp-for="NgayKetThuc" type="datetime-local" class="form-control" required />
+                                <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       id="TrangThai"
+                                       name="TrangThai"
+                                       value="true"
+                                       @(Model.TrangThai == true ? "checked" : "") />
+                                <input type="hidden" name="TrangThai" value="false" />
+
+                                <label class="form-check-label" for="TrangThai">
+                                    Kích hoạt mã khuyến mãi
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i>
+                                Ngày tạo: @Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")
+                            </small>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Cập nhật
+                            </button>
+                            <a asp-action="Index" asp-controller="MaKhuyenMai" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy bỏ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

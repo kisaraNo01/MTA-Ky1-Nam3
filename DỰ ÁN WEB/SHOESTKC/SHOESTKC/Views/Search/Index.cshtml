@@ -1,0 +1,64 @@
+﻿@using SHOESTKC.CSDL
+@model IEnumerable<SanPham>
+
+@{
+    ViewData["Title"] = "Kết quả tìm kiếm";
+}
+
+<section class="search-results py-5">
+    <div class="container">
+        <h2 class="mb-4">Kết quả tìm kiếm: "@ViewBag.Keyword"</h2>
+        <p class="text-muted mb-4">Tìm thấy @ViewBag.ResultCount sản phẩm</p>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <a href="/Product/Detail/@product.Id">
+                                    <img src="@(product.AnhChinh ?? "/images/no-image.jpg")" alt="@product.TenSanPham" class="img-fluid">
+                                </a>
+                                @if (product.BienThe != null && product.BienThe.Any())
+                                {
+                                    var totalStock = product.BienThe.Sum(b => b.SoLuongTon);
+                                    @if (totalStock == 0)
+                                    {
+                                        <span class="badge-status badge-outstock">Hết hàng</span>
+                                    }
+                                }
+                            </div>
+                            <div class="product-info">
+                                @if (!string.IsNullOrEmpty(product.Hang))
+                                {
+                                    <p class="product-brand">@product.Hang</p>
+                                }
+                                <h5 class="product-name">
+                                    <a href="/Product/Detail/@product.Id">@product.TenSanPham</a>
+                                </h5>
+                                <div class="product-price">
+                                    <span class="price text-primary fw-bold">@product.GiaGoc.ToString("N0")đ</span>
+                                </div>
+                                <div class="product-actions mt-2">
+                                    <a href="/Product/Detail/@product.Id" class="btn btn-primary btn-sm w-100">
+                                        <i class="fas fa-eye"></i> Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center py-5">
+                <i class="fas fa-search fa-3x mb-3 text-muted"></i>
+                <h4>Không tìm thấy sản phẩm nào</h4>
+                <p>Vui lòng thử từ khóa khác hoặc <a href="/" class="fw-bold">quay về trang chủ</a></p>
+            </div>
+        }
+    </div>
+</section>

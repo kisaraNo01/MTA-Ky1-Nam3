@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 450px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Đăng nhập</h2>
+            </div>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <form asp-action="Login" asp-controller="Auth" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required
+                           placeholder="Nhập email của bạn">
+                </div>
+
+                <div class="mb-3">
+                    <label for="matKhau" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" id="matKhau" name="matKhau" required
+                           placeholder="Nhập Mật khẩu">
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="ghiNhoDangNhap" name="ghiNhoDangNhap">
+                    <label class="form-check-label" for="ghiNhoDangNhap">
+                        Ghi nhớ đăng nhập
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </button>
+
+                <div class="text-center">
+                    <p class="mb-0">
+                        Chưa có tài khoản? <a asp-action="Register" asp-controller="Auth">Đăng ký ngay</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,261 @@
+@model IEnumerable<SHOESTKC.CSDL.GioHang>
+
+@{
+    ViewData["Title"] = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cartItems = ViewBag.CartItems as IEnumerable<SHOESTKC.CSDL.GioHang>;
+    var userInfo = ViewBag.UserInfo as SHOESTKC.CSDL.NguoiDung;
+}
+
+<div class="container py-5">
+    <h2 class="mb-4"><i class="fas fa-credit-card"></i> Thanh toán</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <form asp-action="PlaceOrder" method="post" id="checkoutForm">
+        <div class="row">
+            <!-- Thông tin giao hàng -->
+            <div class="col-lg-7">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-shipping-fast"></i> Thông tin giao hàng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" value="@userInfo?.HoTen" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="@userInfo?.Email" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" name="soDienThoai" 
+                                   value="@userInfo?.SoDienThoai" required 
+                                   pattern="[0-9]{10,11}" 
+                                   placeholder="Nhập số điện thoại">
+                            <div class="form-text">Vui lòng nhập 10-11 chữ số</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ giao hàng <span class="text-danger">*</span></label>
+                            <textarea class="form-control" name="diaChiGiao" rows="3" 
+                                      required placeholder="Nhập địa chỉ đầy đủ">@userInfo?.DiaChi</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phương thức thanh toán <span class="text-danger">*</span></label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="phuongThucThanhToan" 
+                                       id="cod" value="COD" checked>
+                                <label class="form-check-label" for="cod">
+                                    <i class="fas fa-money-bill-wave text-success"></i> 
+                                    Thanh toán khi nhận hàng (COD)
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="phuongThucThanhToan" 
+                                       id="bank" value="Chuyển khoản">
+                                <label class="form-check-label" for="bank">
+                                    <i class="fas fa-university text-primary"></i> 
+                                    Chuyển khoản ngân hàng
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="phuongThucThanhToan" 
+                                       id="credit" value="Thẻ tín dụng">
+                                <label class="form-check-label" for="credit">
+                                    <i class="fas fa-credit-card text-info"></i> 
+                                    Thẻ tín dụng/Ghi nợ
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="phuongThucThanhToan" 
+                                       id="momo" value="Ví điện tử">
+                                <label class="form-check-label" for="momo">
+                                    <i class="fas fa-mobile-alt text-danger"></i> 
+                                    Ví điện tử (MoMo, ZaloPay...)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tóm tắt đơn hàng -->
+            <div class="col-lg-5">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-shopping-bag"></i> Đơn hàng của bạn</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="order-items" style="max-height: 300px; overflow-y: auto;">
+                            @foreach (var item in cartItems)
+                            {
+                                var giaBan = item.BienThe.SanPham.GiaGoc + (item.BienThe.ChenhLechGia ?? 0m);
+                                var thanhTien = giaBan * item.SoLuong;
+
+                                <div class="d-flex mb-3 pb-2 border-bottom">
+                                    <img src="@item.BienThe.SanPham.AnhChinh" alt="@item.BienThe.SanPham.TenSanPham"
+                                         class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-1">@item.BienThe.SanPham.TenSanPham</h6>
+                                        <small class="text-muted">
+                                            @item.BienThe.MauSac | @item.BienThe.Size | x@item.SoLuong
+                                        </small>
+                                        <div class="text-danger fw-bold">@thanhTien.ToString("N0")đ</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <hr>
+
+                        <!-- Mã khuyến mãi -->
+                        <div class="mb-3">
+                            <label class="form-label">Mã khuyến mãi</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="promoCodeInput" 
+                                       placeholder="Nhập mã giảm giá">
+                                <button class="btn btn-outline-primary" type="button" 
+                                        onclick="applyPromoCode()">
+                                    <i class="fas fa-check"></i> Áp dụng
+                                </button>
+                            </div>
+                            <input type="hidden" name="maKhuyenMaiId" id="maKhuyenMaiId">
+                            <div id="promoMessage" class="mt-2"></div>
+                        </div>
+
+                        <hr>
+
+                        <!-- Tổng tiền -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tạm tính:</span>
+                            <strong id="tamTinh">@ViewBag.TongTien.ToString("N0")đ</strong>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Phí vận chuyển:</span>
+                            <strong id="phiVanChuyen">@ViewBag.PhiVanChuyen.ToString("N0")đ</strong>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2" id="discountRow" style="display: none !important;">
+                            <span class="text-success">Giảm giá:</span>
+                            <strong class="text-success" id="tienGiam">0đ</strong>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong class="fs-5">Tổng cộng:</strong>
+                            <strong class="text-danger fs-4" id="tongThanhToan">@ViewBag.TongThanhToan.ToString("N0")đ</strong>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100 btn-lg">
+                            <i class="fas fa-check-circle"></i> Đặt hàng
+                        </button>
+
+                        <a asp-action="Index" asp-controller="GioHang" class="btn btn-outline-secondary w-100 mt-2">
+                            <i class="fas fa-arrow-left"></i> Quay lại giỏ hàng
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        let appliedPromoId = null;
+
+        function applyPromoCode() {
+            const promoCode = document.getElementById('promoCodeInput').value.trim();
+            if (!promoCode) {
+                showPromoMessage('Vui lòng nhập mã khuyến mãi!', 'danger');
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('maCode', promoCode);
+
+            fetch('/Order/ApplyPromoCode', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    appliedPromoId = data.promoId;
+                    document.getElementById('maKhuyenMaiId').value = data.promoId;
+                    
+                    // Cập nhật UI
+                    document.getElementById('tamTinh').innerText = formatCurrency(data.tongTien);
+                    document.getElementById('phiVanChuyen').innerText = formatCurrency(data.phiVanChuyen);
+                    document.getElementById('tienGiam').innerText = '-' + formatCurrency(data.tienGiam);
+                    document.getElementById('tongThanhToan').innerText = formatCurrency(data.tongThanhToan);
+                    
+                    // Hiện dòng giảm giá
+                    document.getElementById('discountRow').style.display = 'flex';
+                    
+                    showPromoMessage(`✓ ${data.message} Giảm ${formatCurrency(data.tienGiam)}`, 'success');
+                } else {
+                    showPromoMessage(data.message, 'danger');
+                    resetPromo();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showPromoMessage('Có lỗi xảy ra khi áp dụng mã!', 'danger');
+            });
+        }
+
+        function resetPromo() {
+            appliedPromoId = null;
+            document.getElementById('maKhuyenMaiId').value = '';
+            document.getElementById('discountRow').style.display = 'none';
+            
+            // Reset về giá gốc
+            const tamTinh = @ViewBag.TongTien;
+            const phiVanChuyen = @ViewBag.PhiVanChuyen;
+            const tongThanhToan = @ViewBag.TongThanhToan;
+            
+            document.getElementById('tamTinh').innerText = formatCurrency(tamTinh);
+            document.getElementById('phiVanChuyen').innerText = formatCurrency(phiVanChuyen);
+            document.getElementById('tongThanhToan').innerText = formatCurrency(tongThanhToan);
+        }
+
+        function showPromoMessage(message, type) {
+            const messageDiv = document.getElementById('promoMessage');
+            messageDiv.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>`;
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
+        }
+
+        // Validate form trước khi submit
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            const soDienThoai = document.querySelector('input[name="soDienThoai"]').value;
+            const diaChiGiao = document.querySelector('textarea[name="diaChiGiao"]').value;
+            
+            if (!soDienThoai || !diaChiGiao) {
+                e.preventDefault();
+                alert('Vui lòng điền đầy đủ thông tin giao hàng!');
+                return false;
+            }
+        });
+    </script>
+}

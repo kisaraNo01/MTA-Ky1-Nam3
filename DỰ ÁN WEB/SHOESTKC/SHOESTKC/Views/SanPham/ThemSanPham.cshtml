@@ -1,0 +1,148 @@
+﻿@model SHOESTKC.CSDL.SanPham
+
+@{
+    ViewData["Title"] = "Thêm Sản phẩm Mới";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-plus-circle"></i> Thêm Sản phẩm Mới</h2>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label asp-for="TenSanPham" class="form-label">
+                                        Tên Sản phẩm <span class="text-danger">*</span>
+                                    </label>
+                                    <input asp-for="TenSanPham" class="form-control" placeholder="VD: Giày thể thao Nike Air Max" required />
+                                    <span asp-validation-for="TenSanPham" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label asp-for="DanhMucId" class="form-label">
+                                                Danh mục <span class="text-danger">*</span>
+                                            </label>
+                                            <select asp-for="DanhMucId" class="form-select" asp-items="ViewBag.DanhMucs" required>
+                                                <option value="">-- Chọn danh mục --</option>
+                                            </select>
+                                            <span asp-validation-for="DanhMucId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label asp-for="Hang" class="form-label">Hãng/Thương hiệu</label>
+                                            <input asp-for="Hang" class="form-control" placeholder="VD: Biti's, Ananas, Juno" />
+                                            <span asp-validation-for="Hang" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="GiaGoc" class="form-label">
+                                        Giá gốc (VNĐ) <span class="text-danger">*</span>
+                                    </label>
+                                    <input asp-for="GiaGoc" type="number" class="form-control" placeholder="500000" min="0" required />
+                                    <span asp-validation-for="GiaGoc" class="text-danger"></span>
+                                    <small class="text-muted">Nhập giá không có dấu phẩy, VD: 500000</small>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="MoTa" class="form-label">Mô tả Sản phẩm</label>
+                                    <textarea asp-for="MoTa" class="form-control" rows="5" placeholder="Mô tả chi tiết về Sản phẩm..."></textarea>
+                                    <span asp-validation-for="MoTa" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Ảnh Sản phẩm chính</label>
+
+                                    <div class="border rounded p-3 text-center bg-light mb-3 d-flex align-items-center justify-content-center" style="min-height: 250px;">
+                                        <img id="previewImage" src="#" alt="Preview"
+                                             class="img-fluid rounded" style="max-height: 230px; display: none;" />
+                                        <div id="uploadPlaceholder">
+                                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                            <p class="text-muted">Chọn ảnh để xem trước</p>
+                                        </div>
+                                    </div>
+
+                                    <input type="file" name="anhChinhFile" class="form-control" accept="image/*" onchange="previewImageFile(event)" />
+                                    <small class="text-muted">Định dạng: JPG, PNG, GIF (tối đa 5MB)</small>
+                                </div>
+
+                                <div class="alert alert-info border-0">
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Lưu ý:</strong>
+                                    <ul class="mb-0 mt-2 ps-3">
+                                        <li>Sản phẩm sẽ tự động được hiển thị sau khi thêm</li>
+                                        <li>Nhớ thêm phiên bản (size, màu) sau khi tạo Sản phẩm</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy bỏ
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fas fa-save"></i> Lưu Sản phẩm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImageFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Kiểm tra kích thước file (5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Kích thước file quá lớn! Vui lòng chọn ảnh nhỏ hơn 5MB.');
+                    event.target.value = '';
+                    return;
+                }
+
+                // Kiểm tra định dạng
+                if (!file.type.match('image.*')) {
+                    alert('Vui lòng chọn file ảnh (JPG, PNG, GIF)!');
+                    event.target.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('previewImage');
+                    const placeholder = document.getElementById('uploadPlaceholder');
+
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+}

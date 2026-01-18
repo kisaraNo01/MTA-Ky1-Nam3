@@ -1,0 +1,612 @@
+﻿@model IEnumerable<SHOESTKC.CSDL.DonHang>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1"><i class="fas fa-chart-line me-2"></i>Dashboard</h2>
+            <p class="text-muted mb-0">Tổng quan hệ thống quản lý</p>
+        </div>
+        <div class="text-end">
+            <small class="text-muted d-block">Cập nhật lúc</small>
+            <strong>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</strong>
+        </div>
+    </div>
+
+    <!-- Thống kê tổng quan với gradient cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card stats-card-primary">
+                <div class="stats-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <div class="stats-content">
+                    <div class="stats-label">Tổng sản phẩm</div>
+                    <div class="stats-value">@ViewBag.TotalSanPham</div>
+                    <div class="stats-trend">
+                        <i class="fas fa-arrow-up"></i> Đang hoạt động
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card stats-card-success">
+                <div class="stats-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stats-content">
+                    <div class="stats-label">Tổng doanh thu</div>
+                    <div class="stats-value">@((ViewBag.TotalRevenue / 1000000m).ToString("N1"))M</div>
+                    <div class="stats-trend">
+                        <i class="fas fa-arrow-up"></i> @((ViewBag.TotalRevenue ?? 0).ToString("N0")) đ
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card stats-card-info">
+                <div class="stats-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stats-content">
+                    <div class="stats-label">Đơn hàng</div>
+                    <div class="stats-value">@ViewBag.TotalDatHang</div>
+                    <div class="stats-trend">
+                        <i class="fas fa-calendar-alt"></i> Tháng này: @ViewBag.MonthlyOrders
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stats-card stats-card-warning">
+                <div class="stats-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stats-content">
+                    <div class="stats-label">Khách hàng</div>
+                    <div class="stats-value">@ViewBag.TotalKhachHang</div>
+                    <div class="stats-trend">
+                        <i class="fas fa-user-plus"></i> Đã đăng ký
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biểu đồ và thống kê -->
+    <div class="row g-4 mb-4">
+        <!-- Biểu đồ doanh thu -->
+        <div class="col-lg-8">
+            <div class="card modern-card h-100">
+                <div class="card-header border-0 bg-transparent">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-1 fw-bold"><i class="fas fa-chart-area me-2 text-primary"></i>Doanh thu theo tháng</h5>
+                            <p class="text-muted small mb-0">Thống kê 6 tháng gần nhất</p>
+                        </div>
+                        <div class="badge bg-gradient-primary px-3 py-2">Năm @DateTime.Now.Year</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê nhanh -->
+        <div class="col-lg-4">
+            <div class="card modern-card h-100">
+                <div class="card-header border-0 bg-transparent">
+                    <h5 class="mb-0 fw-bold"><i class="fas fa-chart-pie me-2 text-success"></i>Thống kê tháng này</h5>
+                </div>
+                <div class="card-body">
+                    <div class="quick-stat-item">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <div class="text-muted small">Doanh thu tháng @DateTime.Now.Month</div>
+                                <h4 class="mb-0 fw-bold text-success">@ViewBag.MonthlyRevenue.ToString("N0") đ</h4>
+                            </div>
+                            <div class="quick-stat-icon bg-success-light">
+                                <i class="fas fa-dollar-sign text-success"></i>
+                            </div>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="quick-stat-item">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <div class="text-muted small">Đơn hàng tháng này</div>
+                                <h4 class="mb-0 fw-bold text-info">@ViewBag.MonthlyOrders</h4>
+                            </div>
+                            <div class="quick-stat-icon bg-info-light">
+                                <i class="fas fa-shopping-bag text-info"></i>
+                            </div>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 60%"></div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row text-center g-3">
+                        <div class="col-6">
+                            <div class="mini-stat">
+                                <i class="fas fa-check-circle text-success mb-2"></i>
+                                <div class="fw-bold">Hoàn thành</div>
+                                <div class="text-muted small">85%</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mini-stat">
+                                <i class="fas fa-clock text-warning mb-2"></i>
+                                <div class="fw-bold">Đang xử lý</div>
+                                <div class="text-muted small">15%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Đơn hàng gần đây -->
+    <div class="card modern-card">
+        <div class="card-header border-0 bg-transparent">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1 fw-bold"><i class="fas fa-receipt me-2 text-primary"></i>Đơn hàng gần đây</h5>
+                    <p class="text-muted small mb-0">Danh sách đơn hàng mới nhất</p>
+                </div>
+                <a asp-action="DonHang" asp-controller="Admin" class="btn btn-sm btn-outline-primary">
+                    Xem tất cả <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover modern-table mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-0">Mã đơn</th>
+                                <th class="border-0">Khách hàng</th>
+                                <th class="border-0">Tổng tiền</th>
+                                <th class="border-0">Trạng thái đơn</th>
+                                <th class="border-0">Thanh toán</th>
+                                <th class="border-0">Ngày tạo</th>
+                                <th class="border-0 text-end">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">@order.MaDonHang</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-avatar-mini me-2">
+                                                @(order.NguoiDung?.HoTen?.Substring(0, 1).ToUpper() ?? "?")
+                                            </div>
+                                            <div>
+                                                <div class="fw-semibold">@order.NguoiDung?.HoTen</div>
+                                                <small class="text-muted">@order.NguoiDung?.Email</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold text-danger">@order.TongTien.ToString("N0") đ</span>
+                                    </td>
+                                    <td>
+                                        @switch (order.TrangThaiDonHang)
+                                        {
+                                            case "Chờ xác nhận":
+                                                <span class="badge-modern badge-warning">
+                                                    <i class="fas fa-clock me-1"></i>Chờ xác nhận
+                                                </span>
+                                                break;
+                                            case "Đã xác nhận":
+                                                <span class="badge-modern badge-info">
+                                                    <i class="fas fa-check me-1"></i>Đã xác nhận
+                                                </span>
+                                                break;
+                                            case "Đang giao":
+                                                <span class="badge-modern badge-primary">
+                                                    <i class="fas fa-shipping-fast me-1"></i>Đang giao
+                                                </span>
+                                                break;
+                                            case "Đã giao":
+                                                <span class="badge-modern badge-success">
+                                                    <i class="fas fa-check-circle me-1"></i>Đã giao
+                                                </span>
+                                                break;
+                                            case "Đã hủy":
+                                                <span class="badge-modern badge-danger">
+                                                    <i class="fas fa-times-circle me-1"></i>Đã hủy
+                                                </span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (order.TrangThaiThanhToan == "Đã thanh toán")
+                                        {
+                                            <span class="badge-modern badge-success">
+                                                <i class="fas fa-check-circle me-1"></i>Đã thanh toán
+                                            </span>
+                                        }
+                                        else if (order.TrangThaiThanhToan == "Thất bại")
+                                        {
+                                            <span class="badge-modern badge-danger">
+                                                <i class="fas fa-times-circle me-1"></i>Thất bại
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge-modern badge-warning">
+                                                <i class="fas fa-clock me-1"></i>Chưa thanh toán
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="text-muted small">
+                                            <i class="far fa-calendar me-1"></i>@order.NgayTao?.ToString("dd/MM/yyyy")
+                                        </div>
+                                        <div class="text-muted small">
+                                            <i class="far fa-clock me-1"></i>@order.NgayTao?.ToString("HH:mm")
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <a asp-action="ChiTietHoaDon"
+                                           asp-controller="Admin"
+                                           asp-route-id="@order.Id"
+                                           class="btn btn-sm btn-outline-primary rounded-pill">
+                                            <i class="fas fa-eye me-1"></i>Chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">Chưa có đơn hàng nào</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Biểu đồ doanh thu
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(102, 126, 234, 0.4)');
+        gradient.addColorStop(1, 'rgba(102, 126, 234, 0.0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                datasets: [{
+                    label: 'Doanh thu (triệu đồng)',
+                    data: [12, 19, 15, 25, 22, 30],
+                    backgroundColor: gradient,
+                    borderColor: '#667eea',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        borderRadius: 8,
+                        titleFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Doanh thu: ' + context.parsed.y + ' triệu đồng';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'M';
+                            },
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+<style>
+    /* Modern Dashboard Styles */
+    .modern-card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        background: #fff;
+    }
+
+    .modern-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Stats Cards */
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        padding: 24px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-card-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .stats-card-success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .stats-card-info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .stats-card-warning {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    }
+
+    .stats-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 48px;
+        opacity: 0.3;
+    }
+
+    .stats-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .stats-label {
+        font-size: 13px;
+        opacity: 0.9;
+        margin-bottom: 8px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stats-value {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1;
+    }
+
+    .stats-trend {
+        font-size: 12px;
+        opacity: 0.9;
+    }
+
+    .stats-trend i {
+        margin-right: 4px;
+    }
+
+    /* Quick Stats */
+    .quick-stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+
+    .bg-success-light {
+        background: rgba(56, 239, 125, 0.1);
+    }
+
+    .bg-info-light {
+        background: rgba(79, 172, 254, 0.1);
+    }
+
+    .mini-stat {
+        padding: 12px;
+        border-radius: 12px;
+        background: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .mini-stat:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .mini-stat i {
+        font-size: 24px;
+    }
+
+    /* Modern Table */
+    .modern-table thead th {
+        background: #f8f9fa;
+        color: #495057;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 16px;
+    }
+
+    .modern-table tbody td {
+        padding: 16px;
+        vertical-align: middle;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modern-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .modern-table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+    /* User Avatar Mini */
+    .user-avatar-mini {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    /* Modern Badges */
+    .badge-modern {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .badge-modern.badge-warning {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        color: #fff;
+    }
+
+    .badge-modern.badge-info {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: #fff;
+    }
+
+    .badge-modern.badge-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+    }
+
+    .badge-modern.badge-success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: #fff;
+    }
+
+    .badge-modern.badge-danger {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: #fff;
+    }
+
+    /* Progress bars */
+    .progress {
+        border-radius: 10px;
+        background: #e9ecef;
+    }
+
+    .progress-bar {
+        border-radius: 10px;
+    }
+
+    .bg-gradient-success {
+        background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .bg-gradient-info {
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+</style>

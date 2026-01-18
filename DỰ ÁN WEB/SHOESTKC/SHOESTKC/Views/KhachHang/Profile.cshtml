@@ -1,0 +1,340 @@
+@model SHOESTKC.CSDL.NguoiDung
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+    var isAdmin = Model.VaiTro == "admin";
+}
+
+<div class="container py-4">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg" style="background: var(--gradient-primary); color: white;">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="user-avatar-circle-large me-4" style="width: 80px; height: 80px; font-size: 32px; background: white; color: var(--primary-color);">
+                            @if (isAdmin)
+                            {
+                                <i class="fas fa-user-shield"></i>
+                            }
+                            else
+                            {
+                                <span>@Model.HoTen.Substring(0, 1).ToUpper()</span>
+                            }
+                        </div>
+                        <div class="flex-grow-1">
+                            <h2 class="mb-1 fw-bold">@Model.HoTen</h2>
+                            <p class="mb-0 opacity-75">
+                                @if (isAdmin)
+                                {
+                                    <i class="fas fa-crown me-2"></i><span>Quản trị viên</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-user me-2"></i><span>Thành viên</span>
+                                }
+                            </p>
+                        </div>
+                        @if (!isAdmin)
+                        {
+                            <div class="text-end">
+                                <a href="#" class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row g-4">
+        <!-- Left Column - Personal Info -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-user-circle text-primary me-2"></i>Thông tin cá nhân
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="info-item p-3 rounded" style="background: #f8f9fa;">
+                                <label class="text-muted small mb-1">
+                                    <i class="fas fa-signature me-2"></i>Họ và tên
+                                </label>
+                                <p class="mb-0 fw-bold">@Model.HoTen</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item p-3 rounded" style="background: #f8f9fa;">
+                                <label class="text-muted small mb-1">
+                                    <i class="fas fa-envelope me-2"></i>Email
+                                </label>
+                                <p class="mb-0 fw-bold">@Model.Email</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item p-3 rounded" style="background: #f8f9fa;">
+                                <label class="text-muted small mb-1">
+                                    <i class="fas fa-phone me-2"></i>Số điện thoại
+                                </label>
+                                <p class="mb-0 fw-bold">@(Model.SoDienThoai ?? "Chưa cập nhật")</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item p-3 rounded" style="background: #f8f9fa;">
+                                <label class="text-muted small mb-1">
+                                    <i class="fas fa-calendar-alt me-2"></i>Ngày tham gia
+                                </label>
+                                <p class="mb-0 fw-bold">@(Model.NgayTao?.ToString("dd/MM/yyyy") ?? "N/A")</p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="info-item p-3 rounded" style="background: #f8f9fa;">
+                                <label class="text-muted small mb-1">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Địa chỉ
+                                </label>
+                                <p class="mb-0 fw-bold">@(Model.DiaChi ?? "Chưa cập nhật")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Statistics -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-chart-line text-success me-2"></i>Thống kê
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="stat-item mb-3 p-3 rounded" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="d-flex align-items-center text-white">
+                            <div class="stat-icon me-3">
+                                <i class="fas fa-shopping-bag fa-2x"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-0 fw-bold">@Model.DonHang.Count</h3>
+                                <small class="opacity-75">Đơn hàng</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                        var tongChiTieu = Model.DonHang
+                            .Where(dh => dh.TrangThaiDonHang == "Đã giao")
+                            .Sum(dh => dh.TongTien);
+                    }
+
+                    <div class="stat-item mb-3 p-3 rounded" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="d-flex align-items-center text-white">
+                            <div class="stat-icon me-3">
+                                <i class="fas fa-dollar-sign fa-2x"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-0 fw-bold">@tongChiTieu.ToString("N0") đ</h3>
+                                <small class="opacity-75">Tổng chi tiêu</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-item p-3 rounded" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="d-flex align-items-center text-white">
+                            <div class="stat-icon me-3">
+                                <i class="fas fa-star fa-2x"></i>
+                            </div>
+                            <div>
+                                <h3 class="mb-0 fw-bold">@Model.DanhGia.Count</h3>
+                                <small class="opacity-75">Đánh giá</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-bolt text-warning me-2"></i>Thao tác nhanh
+                    </h5>
+                </div>
+                <div class="card-body p-3">
+                    <a asp-action="MyOrders" asp-controller="Order" class="btn btn-outline-primary w-100 mb-2 text-start">
+                        <i class="fas fa-shopping-bag me-2"></i>Xem đơn hàng
+                    </a>
+                    <a asp-action="Index" asp-controller="GioHang" class="btn btn-outline-success w-100 mb-2 text-start">
+                        <i class="fas fa-shopping-cart me-2"></i>Giỏ hàng
+                    </a>
+                    <a href="#" class="btn btn-outline-warning w-100 text-start" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                        <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--gradient-primary); color: white;">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa thông tin
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="editProfileForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Họ và tên</label>
+                            <input type="text" class="form-control" id="editHoTen" value="@Model.HoTen" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="editSoDienThoai" value="@Model.SoDienThoai">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Địa chỉ</label>
+                            <textarea class="form-control" id="editDiaChi" rows="3">@Model.DiaChi</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="updateProfile()">
+                    <i class="fas fa-save me-2"></i>Lưu thay đổi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--gradient-warning); color: white;">
+                <h5 class="modal-title">
+                    <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="changePasswordForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Mật khẩu hiện tại</label>
+                        <input type="password" class="form-control" id="currentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Mật khẩu mới</label>
+                        <input type="password" class="form-control" id="newPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Xác nhận mật khẩu mới</label>
+                        <input type="password" class="form-control" id="confirmPassword" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-warning" onclick="changePassword()">
+                    <i class="fas fa-check me-2"></i>Đổi mật khẩu
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateProfile() {
+            const hoTen = document.getElementById('editHoTen').value;
+            const soDienThoai = document.getElementById('editSoDienThoai').value;
+            const diaChi = document.getElementById('editDiaChi').value;
+
+            Loading.show('Đang cập nhật thông tin...');
+
+            fetch('/KhachHang/UpdateProfile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    hoTen: hoTen,
+                    soDienThoai: soDienThoai,
+                    diaChi: diaChi
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                Loading.hide();
+                if (data.success) {
+                    Toast.success(data.message);
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    Toast.error(data.message);
+                }
+            })
+            .catch(error => {
+                Loading.hide();
+                Toast.error('Có lỗi xảy ra: ' + error);
+            });
+        }
+
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                Toast.error('Mật khẩu mới không khớp!');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                Toast.error('Mật khẩu mới phải có ít nhất 6 ký tự!');
+                return;
+            }
+
+            Loading.show('Đang đổi mật khẩu...');
+
+            fetch('/KhachHang/ChangePassword', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    currentPassword: currentPassword,
+                    newPassword: newPassword
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                Loading.hide();
+                if (data.success) {
+                    Toast.success(data.message);
+                    document.getElementById('changePasswordForm').reset();
+                    setTimeout(() => {
+                        bootstrap.Modal.getInstance(document.getElementById('changePasswordModal')).hide();
+                    }, 1000);
+                } else {
+                    Toast.error(data.message);
+                }
+            })
+            .catch(error => {
+                Loading.hide();
+                Toast.error('Có lỗi xảy ra: ' + error);
+            });
+        }
+    </script>
+}

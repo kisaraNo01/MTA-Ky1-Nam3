@@ -1,0 +1,238 @@
+-- ===================================
+-- DỮ LIỆU MẪU CHO CSDL SHOP GIÀY
+-- ===================================
+
+USE CSDLShoesShop;
+GO
+
+-- ===================================
+-- 1. THÊM NGƯỜI DÙNG (Admin + Khách hàng)
+-- ===================================
+INSERT INTO NguoiDung (Email, MatKhau, HoTen, SoDienThoai, DiaChi, VaiTro) VALUES
+-- Admin
+(N'admin@gmail.vn', N'123', 'admin', N'0901234567', N'32 Thanh mỹ, Thanh Chương , NA', N'admin'),
+(N'quantri@gmail.vn','456', N'QuanLy', N'0912345678', N'236 Hoàng Quốc Việt, Quận Bắc Từ Liêm, HN', N'admin'),
+
+-- Khách hàng
+(N'khach1@gmail.com', N'pass1', N'Đinh Văn Nhất', N'0923456789', N'789 Nguyễn Huệ, Q1, TP.HCM', N'khach_hang'),
+(N'khach2@gmail.com', N'pass2', N'Phạm Văn Hai', N'0934567890', N'321 Hai Bà Trưng, Q3, TP.HCM', N'khach_hang'),
+(N'khach3@gmail.com', N'pass3', N'Hoàng Quốc Ba', N'0945678901', N'654 Võ Văn Tần, Q3, TP.HCM', N'khach_hang'),
+(N'khach4@gmail.com', N'pass4', N'Vi Văn Bốn', N'0956789012', N'987 Cách Mạng Tháng 8, Q10, TP.HCM', N'khach_hang'),
+(N'khach5@gmail.com', N'pass5', N'Đặng Quang Năm', N'0967890123', N'147 Điện Biên Phủ, Bình Thạnh, TP.HCM', N'khach_hang'),
+(N'khach6@gmail.com', N'pass6', N'Võ Thị Sáu', N'0978901234', N'258 Lý Thường Kiệt, Q11, TP.HCM', N'khach_hang');
+GO
+
+-- ===================================
+-- 2. THÊM DANH MỤC (5 loại)
+-- ===================================
+INSERT INTO DanhMuc (TenDanhMuc, MoTa, Slug) VALUES
+(N'Giày Thể Thao', N'Giày thể thao, sneaker, giày chạy bộ', N'giay-the-thao'),
+(N'Giày Công Sở', N'Giày tây, giày công sở nam nữ', N'giay-cong-so'),
+(N'Giày Sandal', N'Dép, sandal, giày đi biển', N'giay-sandal'),
+(N'Giày Boot', N'Giày cao cổ, boot nam nữ', N'giay-boot'),
+(N'Giày Lười', N'Giày mọi, giày lười nam nữ', N'giay-luoi');
+GO
+
+-- ===================================
+-- 3. THÊM SẢN PHẨM (20 sản phẩm - Hãng Việt Nam)
+-- ===================================
+INSERT INTO SanPham (DanhMucId, TenSanPham, Hang, MoTa, GiaGoc, AnhChinh, TrangThai) VALUES
+-- Giày Thể Thao (7 sản phẩm)
+(1, N'Giày Thể Thao Biti''s Hunter X', N'Biti''s Hunter', N'Giày thể thao công nghệ Ananas Cloud, đế êm, thoáng khí', 550000, N'/images/bitis-hunter-x.jpg', 1),
+(1, N'Giày Sneaker Ananas Vintas Jazico', N'Ananas', N'Thiết kế tối giản, chất liệu canvas bền đẹp', 580000, N'/images/ananas-vintas.jpg', 1),
+(1, N'Giày Thể Thao Juno Classic', N'Juno', N'Phong cách năng động, phù hợp với giới trẻ', 420000, N'/images/juno-classic.jpg', 1),
+(1, N'Giày Biti''s Hunter Street', N'Biti''s Hunter', N'Đế cao su non, êm ái cho từng bước chân', 650000, N'/images/bitis-street.jpg', 1),
+(1, N'Giày Running Ananas DOJI', N'Ananas', N'Giày chạy bộ chuyên dụng, hỗ trợ vận động', 750000, N'/images/ananas-doji.jpg', 1),
+(1, N'Giày Sneaker Juno Sport Pro', N'Juno', N'Công nghệ chống sốc, phù hợp tập gym', 680000, N'/images/juno-sport-pro.jpg', 1),
+(1, N'Giày Biti''s Hunter Core', N'Biti''s Hunter', N'Dòng sản phẩm cơ bản, giá tốt', 480000, N'/images/bitis-core.jpg', 1),
+
+-- Giày Công Sở (4 sản phẩm)
+(2, N'Giày Tây Nam Juno Premium', N'Juno', N'Da bò thật, thiết kế sang trọng', 890000, N'/images/juno-premium.jpg', 1),
+(2, N'Giày Công Sở Biti''s Formal', N'Biti''s', N'Đế cao su, chống trơn trượt tốt', 720000, N'/images/bitis-formal.jpg', 1),
+(2, N'Giày Cao Gót Juno Elegant', N'Juno', N'Cao 7cm, phù hợp đi làm và dự tiệc', 650000, N'/images/juno-elegant.jpg', 1),
+(2, N'Giày Oxford Biti''s Classic', N'Biti''s', N'Phong cách Oxford truyền thống', 780000, N'/images/bitis-oxford.jpg', 1),
+
+-- Giày Sandal (3 sản phẩm)
+(3, N'Sandal Biti''s Hunter Beach', N'Biti''s Hunter', N'Chống nước, phù hợp đi biển', 350000, N'/images/bitis-beach.jpg', 1),
+(3, N'Dép Ananas Summer Vibes', N'Ananas', N'Thiết kế trẻ trung, màu sắc đa dạng', 280000, N'/images/ananas-summer.jpg', 1),
+(3, N'Sandal Juno Comfy', N'Juno', N'Đế êm, quai mềm, thoải mái cả ngày', 320000, N'/images/juno-comfy.jpg', 1),
+
+-- Giày Boot (3 sản phẩm)
+(4, N'Boot Nam Juno Explorer', N'Juno', N'Boot cao cổ, phong cách mạnh mẽ', 950000, N'/images/juno-explorer.jpg', 1),
+(4, N'Boot Nữ Biti''s Fashion', N'Biti''s', N'Boot nữ thời trang, phối đồ dễ dàng', 820000, N'/images/bitis-fashion-boot.jpg', 1),
+(4, N'Boot Da Ananas Urban', N'Ananas', N'Chất liệu da tổng hợp cao cấp', 880000, N'/images/ananas-urban.jpg', 1),
+
+-- Giày Lười (3 sản phẩm)
+(5, N'Giày Lười Nam Juno Casual', N'Juno', N'Thiết kế thoải mái, dễ mang', 520000, N'/images/juno-casual.jpg', 1),
+(5, N'Giày Mọi Biti''s Loafer', N'Biti''s', N'Da mềm, ôm chân, đi êm', 580000, N'/images/bitis-loafer.jpg', 1),
+(5, N'Giày Lười Ananas Slip-On', N'Ananas', N'Không dây buộc, tiện lợi', 450000, N'/images/ananas-slipon.jpg', 1);
+GO
+
+-- ===================================
+-- 4. THÊM BIẾN THỂ (66 biến thể)
+-- ===================================
+-- Biến thể cho Biti's Hunter X (3 size x 2 màu = 6)
+INSERT INTO BienThe (SanPhamId, Size, MauSac, MaSKU, SoLuongTon, ChenhLechGia) VALUES
+(1, N'39', N'Đen', N'BHX-39-DEN', 15, 0),
+(1, N'40', N'Đen', N'BHX-40-DEN', 20, 0),
+(1, N'41', N'Đen', N'BHX-41-DEN', 18, 0),
+(1, N'39', N'Trắng', N'BHX-39-TRANG', 12, 0),
+(1, N'40', N'Trắng', N'BHX-40-TRANG', 25, 0),
+(1, N'41', N'Trắng', N'BHX-41-TRANG', 22, 0),
+
+-- Ananas Vintas (3 size x 2 màu = 6)
+(2, N'38', N'Xám', N'ANV-38-XAM', 10, 0),
+(2, N'39', N'Xám', N'ANV-39-XAM', 15, 0),
+(2, N'40', N'Xám', N'ANV-40-XAM', 13, 0),
+(2, N'38', N'Navy', N'ANV-38-NAVY', 8, 0),
+(2, N'39', N'Navy', N'ANV-39-NAVY', 12, 0),
+(2, N'40', N'Navy', N'ANV-40-NAVY', 14, 0),
+
+-- Juno Classic (3 size x 2 màu = 6)
+(3, N'36', N'Đen', N'JNC-36-DEN', 20, 0),
+(3, N'37', N'Đen', N'JNC-37-DEN', 25, 0),
+(3, N'38', N'Đen', N'JNC-38-DEN', 22, 0),
+(3, N'36', N'Hồng', N'JNC-36-HONG', 15, 0),
+(3, N'37', N'Hồng', N'JNC-37-HONG', 18, 0),
+(3, N'38', N'Hồng', N'JNC-38-HONG', 16, 0),
+
+-- Biti's Street (2 size x 2 màu = 4)
+(4, N'40', N'Đen', N'BHS-40-DEN', 12, 0),
+(4, N'41', N'Đen', N'BHS-41-DEN', 15, 0),
+(4, N'40', N'Xanh', N'BHS-40-XANH', 10, 0),
+(4, N'41', N'Xanh', N'BHS-41-XANH', 13, 0),
+
+-- Ananas DOJI (2 size x 2 màu = 4)
+(5, N'39', N'Đỏ', N'AND-39-DO', 8, 50000),
+(5, N'40', N'Đỏ', N'AND-40-DO', 10, 50000),
+(5, N'39', N'Đen', N'AND-39-DEN', 12, 50000),
+(5, N'40', N'Đen', N'AND-40-DEN', 15, 50000),
+
+-- Juno Sport Pro (2 size x 2 màu = 4)
+(6, N'40', N'Xám', N'JSP-40-XAM', 14, 0),
+(6, N'41', N'Xám', N'JSP-41-XAM', 16, 0),
+(6, N'40', N'Navy', N'JSP-40-NAVY', 11, 0),
+(6, N'41', N'Navy', N'JSP-41-NAVY', 13, 0),
+
+-- Biti's Core (2 size x 2 màu = 4)
+(7, N'39', N'Đen', N'BHC-39-DEN', 20, 0),
+(7, N'40', N'Đen', N'BHC-40-DEN', 25, 0),
+(7, N'39', N'Trắng', N'BHC-39-TRANG', 18, 0),
+(7, N'40', N'Trắng', N'BHC-40-TRANG', 22, 0),
+
+-- Juno Premium (3 size x 1 màu = 3)
+(8, N'40', N'Nâu', N'JNP-40-NAU', 8, 0),
+(8, N'41', N'Nâu', N'JNP-41-NAU', 10, 0),
+(8, N'42', N'Nâu', N'JNP-42-NAU', 7, 0),
+
+-- Biti's Formal (3 size x 1 màu = 3)
+(9, N'40', N'Đen', N'BFM-40-DEN', 15, 0),
+(9, N'41', N'Đen', N'BFM-41-DEN', 18, 0),
+(9, N'42', N'Đen', N'BFM-42-DEN', 12, 0),
+
+-- Juno Elegant (3 size x 2 màu = 6)
+(10, N'35', N'Đen', N'JNE-35-DEN', 10, 0),
+(10, N'36', N'Đen', N'JNE-36-DEN', 12, 0),
+(10, N'37', N'Đen', N'JNE-37-DEN', 15, 0),
+(10, N'35', N'Nude', N'JNE-35-NUDE', 8, 0),
+(10, N'36', N'Nude', N'JNE-36-NUDE', 11, 0),
+(10, N'37', N'Nude', N'JNE-37-NUDE', 13, 0),
+
+-- Các sản phẩm còn lại (20 biến thể)
+(11, N'40', N'Đen', N'BOX-40-DEN', 10, 0),
+(11, N'41', N'Đen', N'BOX-41-DEN', 12, 0),
+(12, N'39', N'Đen', N'BHB-39-DEN', 15, 0),
+(12, N'40', N'Đen', N'BHB-40-DEN', 18, 0),
+(13, N'38', N'Xanh', N'ASV-38-XANH', 20, 0),
+(13, N'39', N'Xanh', N'ASV-39-XANH', 22, 0),
+(14, N'36', N'Hồng', N'JCF-36-HONG', 12, 0),
+(14, N'37', N'Hồng', N'JCF-37-HONG', 15, 0),
+(15, N'41', N'Nâu', N'JEX-41-NAU', 5, 0),
+(15, N'42', N'Nâu', N'JEX-42-NAU', 7, 0),
+(16, N'36', N'Đen', N'BFB-36-DEN', 9, 0),
+(16, N'37', N'Đen', N'BFB-37-DEN', 11, 0),
+(17, N'40', N'Da', N'ANU-40-DA', 8, 0),
+(17, N'41', N'Da', N'ANU-41-DA', 10, 0),
+(18, N'40', N'Nâu', N'JCS-40-NAU', 14, 0),
+(18, N'41', N'Nâu', N'JCS-41-NAU', 16, 0),
+(19, N'39', N'Đen', N'BLF-39-DEN', 12, 0),
+(19, N'40', N'Đen', N'BLF-40-DEN', 15, 0),
+(20, N'38', N'Be', N'ASO-38-BE', 11, 0),
+(20, N'39', N'Be', N'ASO-39-BE', 13, 0);
+GO
+
+-- ===================================
+-- 5. THÊM MÃ KHUYẾN MÃI (ĐÃ SỬA LỖI)
+-- ===================================
+-- LƯU Ý: Đã sửa các lỗi:
+-- 1. NgayKetThuc phải > NgayBatDau (ràng buộc CHECK)
+-- 2. TrangThai chỉ nhận giá trị BIT (0 hoặc 1)
+INSERT INTO MaKhuyenMai (MaCode, LoaiKM, GiaTriGiam, GiaTriDonToiThieu, SoLanDungToiDa, SoLanDaDung, NgayBatDau, NgayKetThuc, TrangThai) VALUES
+(N'WELCOME22/12', N'phan_tram', 10, 500000, 100, 15, '2025-10-01', '2025-12-31', 1),
+(N'FREESHIP100', N'mien_phi_ship', 30000, 300000, 200, 45, '2025-07-01', '2025-12-30', 1),
+(N'GIAM50K', N'phan_tram', 50000, 1000000, 50, 8, '2025-09-29', '2025-11-15', 1),
+(N'SaleChua', N'phan_tram', 15, 800000, 150, 22, '2025-07-04', '2025-11-30', 1),
+(N'FLASH20', N'phan_tram', 20, 600000, 30, 30, '2025-08-22', '2025-11-20', 1);
+GO
+
+-- ===================================
+-- 6. THÊM GIỎ HÀNG
+-- ===================================
+INSERT INTO GioHang (NguoiDungId, BienTheId, SoLuong) VALUES
+(3, 1, 1),  -- Khách 1: Biti's Hunter X Đen 39
+(3, 13, 2), -- Khách 1: Juno Classic Đen 36
+(4, 25, 1), -- Khách 2: Ananas DOJI
+(5, 7, 1),  -- Khách 3: Ananas Vintas
+(5, 19, 1), -- Khách 3: Juno Classic Hồng 38
+(6, 31, 2), -- Khách 4: Juno Sport Pro
+(7, 40, 1); -- Khách 5: Biti's Formal
+GO
+
+-- ===================================
+-- 7. THÊM ĐƠN HÀNG
+-- ===================================
+INSERT INTO DonHang (NguoiDungId, MaKhuyenMaiId, MaDonHang, TamTinh, TienGiam, PhiVanChuyen, TongTien, DiaChiGiao, SoDienThoai, PhuongThucThanhToan, TrangThaiThanhToan, TrangThaiDonHang, NgayTao) VALUES
+(3, 1, N'DH202510290001', 1100000, 110000, 30000, 1020000, N'789 Nguyễn Huệ, Q1, TP.HCM', N'0923456789', N'COD', N'chua_thanh_toan', N'dang_giao', '2025-10-25'),
+(4, 2, N'DH202510290002', 580000, 0, 0, 580000, N'321 Hai Bà Trưng, Q3, TP.HCM', N'0934567890', N'chuyen_khoan', N'da_thanh_toan', N'da_giao', '2025-10-20'),
+(5, NULL, N'DH202510290003', 420000, 0, 30000, 450000, N'654 Võ Văn Tần, Q3, TP.HCM', N'0945678901', N'the_tin_dung', N'da_thanh_toan', N'da_giao', '2025-10-15'),
+(6, 3, N'DH202510290004', 1600000, 50000, 30000, 1580000, N'987 Cách Mạng Tháng 8, Q10, TP.HCM', N'0956789012', N'vi_dien_tu', N'da_thanh_toan', N'cho_xac_nhan', '2025-10-28'),
+(7, NULL, N'DH202510290005', 890000, 0, 30000, 920000, N'147 Điện Biên Phủ, Bình Thạnh, TP.HCM', N'0967890123', N'COD', N'chua_thanh_toan', N'da_huy', '2025-10-22'),
+(6, 4, N'DH202510290006', 1300000, 195000, 30000, 1135000, N'741 Phạm Văn Đồng, Thủ Đức, TP.HCM', N'0978901234', N'chuyen_khoan', N'da_thanh_toan', N'da_xac_nhan', '2025-10-26');
+GO
+
+-- ===================================
+-- 8. THÊM CHI TIẾT ĐƠN HÀNG
+-- ===================================
+INSERT INTO ChiTietDonHang (DonHangId, BienTheId, SoLuong, DonGia, ThanhTien) VALUES
+-- Đơn hàng 1
+(1, 1, 1, 550000, 550000),
+(1, 2, 1, 550000, 550000),
+
+-- Đơn hàng 2
+(2, 7, 1, 580000, 580000),
+
+-- Đơn hàng 3
+(3, 13, 1, 420000, 420000),
+
+-- Đơn hàng 4
+(4, 37, 2, 800000, 1600000),
+
+-- Đơn hàng 5
+(5, 39, 1, 890000, 890000),
+
+-- Đơn hàng 6
+(6, 25, 1, 800000, 800000),
+(6, 29, 1, 500000, 500000);
+GO
+
+-- ===================================
+-- 9. THÊM ĐÁNH GIÁ
+-- ===================================
+INSERT INTO DanhGia (NguoiDungId, SanPhamId, DonHangId, SoSao, NoiDung, NgayTao) VALUES
+(4, 2, 2, 5, N'Giày rất đẹp và chất lượng tốt. Đi rất êm chân. Giao hàng nhanh!', '2025-10-21'),
+(5, 3, 3, 4, N'Sản phẩm tốt, đúng như mô tả. Giá hợp lý.', '2025-10-16'),
+(6, 5, 6, 5, N'Giày chạy bộ tuyệt vời! Nhẹ và thoáng khí. Rất hài lòng!', '2025-10-27'),
+(3, 1, 1, 5, N'Biti''s Hunter luôn là lựa chọn số 1. Chất lượng Việt Nam!', '2025-10-26'),
+(6, 6, 6, 4, N'Giày đẹp, phù hợp tập gym. Đế êm ái.', '2025-10-27');
+GO
+

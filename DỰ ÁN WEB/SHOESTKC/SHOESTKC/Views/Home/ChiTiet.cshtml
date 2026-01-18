@@ -1,0 +1,668 @@
+@model SHOESTKC.CSDL.SanPham
+
+@{
+    ViewData["Title"] = Model.TenSanPham;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Lấy các nhóm màu sắc và size duy nhất (chỉ lấy các biến thể còn hàng)
+    var cacMauSac = Model.BienThe
+        .Where(bt => bt.SoLuongTon > 0)
+        .Select(bt => bt.MauSac)
+        .Distinct()
+        .ToList();
+
+    var cacSizes = Model.BienThe
+        .Where(bt => bt.SoLuongTon > 0)
+        .Select(bt => bt.Size)
+        .Distinct()
+        .OrderBy(s => s)
+        .ToList();
+}
+
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item">
+                <a asp-action="Category" asp-route-id="@Model.DanhMucId">@Model.DanhMuc?.TenDanhMuc</a>
+            </li>
+            <li class="breadcrumb-item active">@Model.TenSanPham</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image-wrapper">
+                @if (!string.IsNullOrEmpty(Model.AnhChinh))
+                {
+                    <img src="@Model.AnhChinh" alt="@Model.TenSanPham" class="img-fluid rounded shadow"
+                         id="mainImage" onerror="this.src='/images/no-image.jpg'" />
+                }
+                else
+                {
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 500px;">
+                        <i class="fas fa-image fa-5x text-muted"></i>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="product-details">
+                <span class="badge bg-info mb-2">@Model.DanhMuc?.TenDanhMuc</span>
+                <h2 class="mb-3">@Model.TenSanPham</h2>
+                <p class="text-muted mb-3"><i class="fas fa-tag"></i> Hãng: <strong>@Model.Hang</strong></p>
+
+                <div class="price-section mb-3">
+                    <div class="product-price" id="productPrice">@Model.GiaGoc.ToString("N0")₫</div>
+                    <small class="text-muted" id="price-variation"></small>
+                </div>
+
+                @if (Model.BienThe != null && Model.BienThe.Any(bt => bt.SoLuongTon > 0))
+                {
+                    <fieldset>
+                        <div class="mb-3">
+                            <h6 class="mb-2"><i class="fas fa-palette"></i> Chọn màu sắc: <strong id="selectedColorText" class="text-primary"></strong></h6>
+                            <div class="variant-group">
+                                @foreach (var mau in cacMauSac)
+                                {
+                                    <div class="form-check variant-option-color">
+                                        <input class="form-check-input" type="radio" name="selectedColor" id="color-@mau.Replace(" ", "-")" value="@mau">
+                                        <label class="form-check-label" for="color-@mau.Replace(" ", "-")">
+                                            @mau
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="mb-2"><i class="fas fa-ruler"></i> Chọn size: <strong id="selectedSizeText" class="text-primary"></strong></h6>
+                            <div class="variant-group" id="size-options">
+                                @foreach (var size in cacSizes)
+                                {
+                                    <div class="form-check variant-option-size disabled">
+                                        <input class="form-check-input" type="radio" name="selectedSize" id="size-@size" value="@size" disabled>
+                                        <label class="form-check-label" for="size-@size">
+                                            @size
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div id="variant-info" class="alert alert-info" style="display:none;"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Số lượng</label>
+                        <div class="quantity-selector disabled">
+                            <button class="qty-btn" type="button" onclick="changeQty(-1)" disabled>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="SoLuong" value="1" min="1" readonly>
+                            <button class="qty-btn" type="button" onclick="changeQty(1)" disabled>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mb-4">
+                        <button class="btn btn-primary btn-lg" onclick="addToCart()" id="btnAddToCart" disabled>
+                            <i class="fas fa-cart-plus"></i> Chọn Size và Màu để thêm
+                        </button>
+                        <button class="btn btn-outline-success btn-lg" onclick="buyNow()" id="btnBuyNow" disabled>
+                            <i class="fas fa-bolt"></i> Mua ngay
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i> Sản phẩm hiện đang hết hàng
+                    </div>
+                }
+
+                <div class="product-info mt-4">
+                    <h5><i class="fas fa-star text-warning"></i> Đặc điểm nổi bật:</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-success"></i> Chính hãng 100%</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Bảo hành 3 tháng</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Đổi trả trong 7 ngày</li>
+                        <li><i class="fas fa-check-circle text-success"></i> Miễn phí vận chuyển</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-info-circle"></i> Mô tả sản phẩm</h4>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.MoTa))
+                    {
+                        <p>@Model.MoTa</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Chưa có mô tả chi tiết cho sản phẩm này.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.DanhGia != null && Model.DanhGia.Any())
+    {
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-star"></i> Đánh giá sản phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var danhGia in Model.DanhGia.OrderByDescending(dg => dg.NgayTao))
+                        {
+                            <div class="review-item border-bottom pb-3 mb-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">@danhGia.NguoiDung?.HoTen</h6>
+                                        <div class="text-warning mb-2">
+                                            @for (int i = 0; i < danhGia.SoSao; i++)
+                                            {
+                                                <i class="fas fa-star"></i>
+                                            }
+                                            @for (int i = danhGia.SoSao; i < 5; i++)
+                                            {
+                                                <i class="far fa-star"></i>
+                                            }
+                                        </div>
+                                        <p class="mb-0">@danhGia.NoiDung</p>
+                                    </div>
+                                    @if (danhGia.NgayTao.HasValue)
+                                    {
+                                        <small class="text-muted">@danhGia.NgayTao.Value.ToString("dd/MM/yyyy")</small>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.SanPhamLienQuan != null)
+    {
+        var splq = ViewBag.SanPhamLienQuan as List<SHOESTKC.CSDL.SanPham>;
+        if (splq != null && splq.Any())
+        {
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h4 class="mb-4"><i class="fas fa-th-large"></i> Sản phẩm liên quan</h4>
+                    <div class="row g-4">
+                        @foreach (var sp in splq)
+                        {
+                            <div class="col-md-3">
+                                <div class="card product-card h-100">
+                                    <a asp-action="ChiTiet" asp-route-id="@sp.Id" class="text-decoration-none">
+                                        @if (!string.IsNullOrEmpty(sp.AnhChinh))
+                                        {
+                                            <img src="@sp.AnhChinh" class="card-img-top" alt="@sp.TenSanPham"
+                                                 style="height: 200px; object-fit: cover;" onerror="this.src='/images/no-image.jpg'" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                            </div>
+                                        }
+                                        <div class="card-body">
+                                            <h6 class="card-title text-dark">@sp.TenSanPham</h6>
+                                            <p class="text-primary fw-bold">@sp.GiaGoc.ToString("N0")đ</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<style>
+    /* ===== MODERN PRODUCT PAGE DESIGN ===== */
+    
+    /* Breadcrumb */
+    .breadcrumb {
+        background: #fff;
+        padding: 12px 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .breadcrumb-item a {
+        color: #0088cc;
+        text-decoration: none;
+        font-weight: 400;
+        transition: all 0.2s;
+    }
+    
+    .breadcrumb-item a:hover {
+        color: #ee4d2d;
+    }
+    
+    .breadcrumb-item.active {
+        color: #666;
+    }
+    
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: #999;
+    }
+
+    /* Hình ảnh sản phẩm với hiệu ứng */
+    .product-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s ease;
+    }
+    
+    .product-image-wrapper:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    }
+    
+    .product-image-wrapper img {
+        border-radius: 20px;
+        transition: transform 0.6s ease;
+    }
+    
+    .product-image-wrapper:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Badge danh mục */
+    .badge.bg-info {
+        background: #0088cc !important;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        border-radius: 2px;
+        box-shadow: none;
+    }
+
+    /* Tiêu đề sản phẩm */
+    .product-details h2 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Giá sản phẩm */
+    .price-section {
+        background: #fafafa;
+        padding: 15px;
+        border-radius: 4px;
+    }
+    
+    .product-price {
+        color: #ee4d2d;
+        font-size: 1.75rem;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    #price-variation {
+        color: #999;
+        font-size: 0.9rem;
+    }
+
+    /* Variant Selection - Màu sắc & Size */
+    .variant-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .form-check.variant-option-color,
+    .form-check.variant-option-size {
+        padding: 0;
+        margin: 0;
+    }
+
+    .form-check.variant-option-color .form-check-input,
+    .form-check.variant-option-size .form-check-input {
+        display: none;
+    }
+
+    .form-check.variant-option-color .form-check-label,
+    .form-check.variant-option-size .form-check-label {
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 600;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .form-check.variant-option-color .form-check-label::before,
+    .form-check.variant-option-size .form-check-label::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.5s;
+    }
+    
+    .form-check.variant-option-color .form-check-label:hover::before,
+    .form-check.variant-option-size .form-check-label:hover::before {
+        left: 100%;
+    }
+
+    .form-check.variant-option-color .form-check-label:hover,
+    .form-check.variant-option-size .form-check-label:hover {
+        border-color: #667eea;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Khi được chọn */
+    .form-check.variant-option-color .form-check-input:checked + .form-check-label,
+    .form-check.variant-option-size .form-check-input:checked + .form-check-label {
+        border-color: #ee4d2d;
+        background: #ee4d2d;
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(238, 77, 45, 0.3);
+    }
+
+    /* Khi bị disabled */
+    .form-check.variant-option-size.disabled .form-check-label {
+        background: #f7fafc;
+        color: #cbd5e0;
+        cursor: not-allowed;
+        border-color: #e2e8f0;
+        opacity: 0.6;
+    }
+
+    /* Bộ chọn số lượng */
+    .quantity-selector {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .quantity-selector.disabled {
+        border-color: #e5e5e5;
+        background: #fafafa;
+    }
+
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: #fff;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .qty-btn:hover:not(:disabled) {
+        background: #f5f5f5;
+        color: #333;
+    }
+
+    .qty-btn:active:not(:disabled) {
+        background: #e5e5e5;
+    }
+
+    .qty-btn:disabled {
+        color: #ccc;
+        cursor: default;
+        opacity: 0.5;
+    }
+
+    .qty-input {
+        width: 50px;
+        height: 32px;
+        border: none;
+        border-left: 1px solid #d9d9d9;
+        border-right: 1px solid #d9d9d9;
+        text-align: center;
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: #333;
+        background: #fff;
+        cursor: default;
+    }
+
+    .qty-input:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    /* Nút hành động */
+    .btn-primary, .btn-outline-success {
+        border-radius: 4px;
+        padding: 12px 24px;
+        font-weight: 400;
+        font-size: 1rem;
+        transition: all 0.2s;
+    }
+    
+    .btn-primary {
+        background: #ee4d2d;
+        border: none;
+        color: #fff;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+        background: #d73211;
+    }
+    
+    .btn-outline-success {
+        background: #fff;
+        border: 1px solid #ee4d2d;
+        color: #ee4d2d;
+    }
+    
+    .btn-outline-success:hover:not(:disabled) {
+        background: #fff5f5;
+        border-color: #d73211;
+        color: #d73211;
+    }
+    
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Alert variant info */
+    #variant-info {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border: none;
+        border-radius: 12px;
+        padding: 15px 20px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+        animation: slideIn 0.4s ease;
+    }
+    
+    @@keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Đặc điểm nổi bật */
+    .product-info ul li {
+        padding: 8px 0;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    
+    .product-info ul li:hover {
+        transform: translateX(5px);
+        color: #667eea;
+    }
+    
+    .product-info ul li i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+
+    /* Card sections */
+    .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        overflow: hidden;
+    }
+    
+    .card:hover {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        transform: translateY(-5px);
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        font-weight: 700;
+        padding: 20px;
+        border: none;
+    }
+    
+    .card-header h4 {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    /* Review items */
+    .review-item {
+        padding: 20px 0;
+        transition: all 0.3s;
+    }
+    
+    .review-item:hover {
+        background: #f7fafc;
+        padding-left: 15px;
+        border-radius: 12px;
+    }
+    
+    .review-item:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Product cards (sản phẩm liên quan) */
+    .product-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-card img {
+        transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover img {
+        transform: scale(1.1);
+    }
+    
+    .product-card .card-body {
+        padding: 20px;
+    }
+    
+    .product-card .card-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    .product-card .text-primary {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        font-size: 1.3rem;
+    }
+
+    /* Animations */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .product-details, .product-image-wrapper {
+        animation: fadeInUp 0.6s ease;
+    }
+</style>
+
+@section Scripts {
+    <script src="~/js/product-detail.js"></script>
+    <script>
+        // Dữ liệu biến thể từ Server
+        const productVariants = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.BienThe
+            .Where(bt => bt.SoLuongTon > 0)
+            .Select(bt => new {
+                id = bt.Id,
+                mausac = bt.MauSac,
+                size = bt.Size.ToString(),
+                soLuongTon = bt.SoLuongTon,
+                giaGoc = Model.GiaGoc,
+                chenhLechGia = bt.ChenhLechGia ?? 0
+            })
+        ));
+
+        const productBasePrice = @Model.GiaGoc;
+
+        // Khởi tạo trang chi tiết sản phẩm khi DOM đã load
+        document.addEventListener('DOMContentLoaded', function() {
+            initProductDetail(productVariants, productBasePrice);
+        });
+    </script>
+}

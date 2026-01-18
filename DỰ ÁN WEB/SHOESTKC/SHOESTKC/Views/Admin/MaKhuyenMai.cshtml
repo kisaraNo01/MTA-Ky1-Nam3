@@ -1,0 +1,232 @@
+﻿@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Microsoft.EntityFrameworkCore.Metadata
+@model IEnumerable<SHOESTKC.CSDL.MaKhuyenMai>
+
+@{
+    ViewData["Title"] = "Danh sách mã khuyến mãi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    // Sửa lỗi: CS0119, CS1003, CS1525
+    // Giả định ViewBag.PageSt là bool, ViewBag.IIndex là int? (hoặc null)
+    int stt = ((ViewBag.PageSt != null && ViewBag.PageSt == true ? (ViewBag.IIndex ?? 0) : 0) + 1);
+    var model = Model; // Fix CS0103: define 'model' as an alias for 'Model'
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-tags"></i> Mã khuyến mãi</h2>
+        <a asp-action="Create" asp-controller="MaKhuyenMai" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm mới
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <form asp-action="Index" asp-controller="MaKhuyenMai" method="get" class="row g-3">
+                <div class="col-md-10">
+                    <label class="form-label">Tìm theo mã code...</label>
+                    <input type="text" name="search" class="form-control"
+                           placeholder="Nhập mã code cần tìm" value="@ViewBag.Search">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thông báo kết quả tìm kiếm -->
+    @if (!string.IsNullOrEmpty(ViewBag.Search))
+    {
+        <div class="alert alert-info border-0 shadow-sm mb-3">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-info-circle me-2"></i>
+                <div>
+                    <strong>Kết quả tìm kiếm: @(ViewBag.TotItems ?? 0) mã khuyến mãi</strong>
+                    <div class="mt-1">
+                        <span class="badge bg-primary me-1">
+                            <i class="fas fa-search"></i> "@ViewBag.Search"
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã code</th>
+                            <th>Loại KM</th>
+                            <th>Giá trị giảm</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (model != null && model.Any())
+                        {
+                            @foreach (var item in model)
+                            {
+                                <tr>
+                                    <td><strong>@stt</strong></td>
+                                    <td>
+                                        <strong class="text-primary">@item.MaCode</strong>
+                                        <br />
+                                        <small class="text-muted">
+                                            <!-- Đã dùng: Không có thuộc tính LanDaDung/LanDungToiDa trong MaKhuyenMai -->
+                                            <!-- Nếu muốn hiển thị số lần đã dùng/tối đa, cần bổ sung các thuộc tính này vào class MaKhuyenMai -->
+                                            N/A
+                                        </small>
+                                    </td>
+                                    <td>
+                                        @if (item.LoaiKm == "phan_tram")
+                                        {
+                                            <span class="badge bg-info">Phần trăm</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success">Miễn phí ship</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.LoaiKm == "phan_tram")
+                                        {
+                                            <strong class="text-danger">@item.GiaTriGiam%</strong>
+                                        }
+                                        else
+                                        {
+                                            <strong class="text-success">@item.GiaTriGiam.ToString("N0") VNĐ</strong>
+                                        }
+                                    </td>
+                                    <td>@item.NgayBatDau.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.NgayKetThuc.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        @{
+                                            var now = DateTime.Now;
+                                            if (item.TrangThai == true && now >= item.NgayBatDau && now <= item.NgayKetThuc)
+                                            {
+                                                <span class="badge bg-success">Hoạt động</span>
+                                            }
+                                            else if (now > item.NgayKetThuc)
+                                            {
+                                                <span class="badge bg-secondary">Hết hạn</span>
+                                            }
+                                            else if (now < item.NgayBatDau)
+                                            {
+                                                <span class="badge bg-warning">Chưa bắt đầu</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger">Vô hiệu</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-controller="MaKhuyenMai" asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-warning" title="Sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button onclick="deleteVoucher(@item.Id)"
+                                                class="btn btn-sm btn-danger" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                stt++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" class="text-center text-muted">
+                                    <i class="fas fa-inbox fa-3x mb-2"></i>
+                                    <p>Chưa có mã khuyến mãi nào</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @* FIX: Replace invalid conditional and variable usage with correct ViewBag property names and logic *@
+            @if (ViewBag.TotPages != null && ViewBag.TotPages > 1)
+            {
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage - 1)&search=@ViewBag.Search">Trước</a>
+                        </li>
+
+                        @for (int i = 1; i <= ViewBag.TotPages; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="?page=@i&search=@ViewBag.Search">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotPages ? "disabled" : "")">
+                            <a class="page-link"
+                               href="?page=@(ViewBag.CurrentPage + 1)&search=@ViewBag.Search">Sau</a>
+                        </li>
+                    </ul>
+                    <p class="text-center text-muted">
+                        Hiển thị trang @ViewBag.CurrentPage / @ViewBag.TotPages –
+                        tổng @ViewBag.TotItems mã
+                    </p>
+                </nav>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteVoucher(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa mã khuyến mãi này?')) {
+                fetch('/MaKhuyenMai/Delete?id=' + id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Có lỗi xảy ra: ' + error);
+                });
+            }
+        }
+    </script>
+}

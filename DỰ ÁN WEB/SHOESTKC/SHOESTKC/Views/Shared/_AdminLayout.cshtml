@@ -1,0 +1,129 @@
+﻿﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin SHOESTKC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/toast.css" />
+    <link rel="stylesheet" href="~/css/confirm-dialog.css" />
+    <link rel="stylesheet" href="~/css/loading.css" />
+    <link rel="stylesheet" href="~/css/price-validation.css" asp-append-version="true" />
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --header-height: 60px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Sidebar */
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .admin-sidebar .brand {
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .admin-sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 12px 20px;
+            display: block;
+            transition: all 0.3s;
+        }
+        .admin-sidebar .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .admin-sidebar .nav-link.active {
+            background: #3498db;
+            color: white;
+        }
+        /* Main content */
+        .admin-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 20px;
+        }
+        .admin-header {
+            background: white;
+            padding: 15px 20px;
+            margin: -20px -20px 20px -20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <div class="brand">
+                <i class="fas fa-shoe-prints"></i> SHOESTKC Admin
+            </div>
+            <nav class="nav flex-column">
+                <a class="nav-link" asp-action="Index" asp-controller="Admin">
+                    <i class="fas fa-home"></i> Tổng quan
+                </a>
+                <a class="nav-link" asp-action="SanPham" asp-controller="Admin">
+                    <i class="fas fa-box"></i> Sản phẩm
+                </a>
+                <a class="nav-link" asp-action="Index" asp-controller="Category">
+                    <i class="fas fa-list"></i> Danh mục
+                </a>
+                <a class="nav-link" asp-action="Index" asp-controller="Size">
+                    <i class="fas fa-ruler"></i> Size
+                </a>
+                <a class="nav-link" asp-action="Index" asp-controller="MauSac">
+                    <i class="fas fa-palette"></i> Màu sắc
+                </a>
+                <a class="nav-link" asp-action="Index" asp-controller="KhachHang">
+                    <i class="fas fa-users"></i> Khách hàng
+                </a>
+                <a class="nav-link" asp-action="DatHang" asp-controller="Admin">
+                    <i class="fas fa-shopping-cart"></i> Đơn hàng
+                </a>
+                <a class="nav-link" asp-action="Index" asp-controller="MaKhuyenMai">
+                    <i class="fas fa-tag"></i> Mã khuyến mãi
+                </a>
+                <hr style="border-color: rgba(255,255,255,0.1);">
+                <a class="nav-link" asp-action="Index" asp-controller="Home">
+                    <i class="fas fa-globe"></i> Xem website
+                </a>
+                <a class="nav-link" asp-action="Logout" asp-controller="Auth">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <div class="admin-header">
+                <h4 class="mb-0">@ViewData["Title"]</h4>
+            </div>
+            
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/toast.js"></script>
+    <script src="~/js/confirm-dialog.js"></script>
+    <script src="~/js/loading.js"></script>
+    <script src="~/js/price-validation.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

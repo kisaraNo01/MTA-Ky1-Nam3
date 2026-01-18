@@ -1,0 +1,172 @@
+﻿@model SHOESTKC.CSDL.SanPham
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-info-circle"></i> Chi tiết sản phẩm</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Ảnh sản phẩm -->
+                        <div class="col-md-4">
+                            @if (!string.IsNullOrEmpty(Model.AnhChinh))
+                            {
+                                <img src="@Model.AnhChinh"
+                                     alt="Ảnh sản phẩm"
+                                     class="img-fluid rounded shadow-sm" />
+                            }
+                            else
+                            {
+                                <div class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center"
+                                     style="height:400px">
+                                    <div class="text-muted text-center">
+                                        <i class="fas fa-image fa-5x mb-3"></i>
+                                        <p>Chưa có ảnh</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Thông tin -->
+                        <div class="col-md-8">
+                            <h3 class="mb-3">@Model.TenSanPham</h3>
+
+                            <div class="mb-3">
+                                <strong>@Html.DisplayNameFor(m => m.GiaGoc):</strong>
+                                <span class="text-danger fs-5 fw-bold">
+                                    @Model.GiaGoc.ToString("N0") VNĐ
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>@Html.DisplayNameFor(m => m.DanhMuc):</strong>
+                                <span>@Model.DanhMuc?.TenDanhMuc</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>@Html.DisplayNameFor(m => m.Hang):</strong>
+                                <span>@Model.Hang</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>Số phiên bản:</strong>
+                                <span class="badge bg-info">
+                                    @(Model.BienThe?.Count ?? 0) phiên bản
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong>@Html.DisplayNameFor(m => m.TrangThai):</strong>
+                                @if (Model.TrangThai == true)
+                                {
+                                    <span class="badge bg-success">Đang hiển thị</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Đang ẩn</span>
+                                }
+                            </div>
+
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    Tạo lúc: @Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")
+                                    |
+                                    Cập nhật: @Model.NgayCapNhat?.ToString("dd/MM/yyyy HH:mm")
+                                </small>
+                            </div>
+
+                            <hr />
+
+                            <h5>Mô tả sản phẩm</h5>
+                            <div style="white-space: pre-wrap">
+                                @(string.IsNullOrEmpty(Model.MoTa)
+                                                                ? "Không có mô tả."
+                                                                : Model.MoTa)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danh sách biến thể -->
+                    @if (Model.BienThe != null && Model.BienThe.Any())
+                    {
+                        <hr class="my-4" />
+                        <h5 class="mb-3">
+                            <i class="fas fa-layer-group"></i>
+                            Danh sách phiên bản (@Model.BienThe.Count)
+                        </h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Màu sắc</th>
+                                        <th>Size</th>
+                                        <th>SKU</th>
+                                        <th>Số lượng tồn kho</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bt in Model.BienThe)
+                                    {
+                                        <tr>
+                                            <td>@bt.MauSac</td>
+                                            <td><span class="badge bg-secondary">@bt.Size</span></td>
+                                            <td><code>@bt.MaSku</code></td>
+                                            <td>
+                                                @if (bt.SoLuongTon > 0)
+                                                {
+                                                    <span class="text-success fw-bold">
+                                                        @bt.SoLuongTon
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger fw-bold">
+                                                        Hết hàng
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (bt.SoLuongTon > 0)
+                                                {
+                                                    <span class="badge bg-success">Kích hoạt</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">Vô hiệu</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="SanPham" asp-controller="Admin" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                        <a asp-action="SuaSanPham"
+                           asp-controller="Admin"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Sửa sản phẩm
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

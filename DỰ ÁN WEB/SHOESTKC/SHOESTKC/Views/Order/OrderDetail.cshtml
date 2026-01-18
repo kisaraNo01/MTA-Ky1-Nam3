@@ -1,0 +1,231 @@
+@model SHOESTKC.CSDL.DonHang
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2 class="mb-4">
+                <i class="fas fa-receipt"></i> Chi tiết đơn hàng
+                <small class="text-muted">#@Model.MaDonHang</small>
+            </h2>
+
+            <!-- Order Status Timeline -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-truck"></i> Trạng thái đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        @{
+                            var statuses = new[] { "Chờ xác nhận", "Đã xác nhận", "Đang giao", "Đã giao" };
+                            var currentIndex = Array.IndexOf(statuses, Model.TrangThaiDonHang);
+                            if (currentIndex == -1) currentIndex = 0;
+                        }
+
+                        @for (int i = 0; i < statuses.Length; i++)
+                        {
+                            var isActive = i <= currentIndex;
+                            var isCancelled = Model.TrangThaiDonHang == "Đã hủy";
+                            
+                            <div class="col-3">
+                                <div class="mb-2">
+                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center @(isActive && !isCancelled ? "bg-success" : "bg-secondary") text-white" 
+                                         style="width: 50px; height: 50px;">
+                                        <i class="fas @(i == 0 ? "fa-clipboard-check" : i == 1 ? "fa-check" : i == 2 ? "fa-shipping-fast" : "fa-box")"></i>
+                                    </div>
+                                </div>
+                                <small class="@(isActive && !isCancelled ? "text-success fw-bold" : "text-muted")">
+                                    @statuses[i]
+                                </small>
+                            </div>
+                        }
+                    </div>
+
+                    @if (Model.TrangThaiDonHang == "Đã hủy")
+                    {
+                        <div class="alert alert-danger mt-3 mb-0">
+                            <i class="fas fa-times-circle"></i> Đơn hàng đã bị hủy
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-shopping-bag"></i> Sản phẩm</h5>
+                </div>
+                <div class="card-body">
+                    @foreach (var item in Model.ChiTietDonHang)
+                    {
+                        <div class="row mb-3 pb-3 border-bottom">
+                            <div class="col-md-2">
+                                <img src="@item.BienThe.SanPham.AnhChinh" alt="@item.BienThe.SanPham.TenSanPham"
+                                     class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-5">
+                                <h6>@item.BienThe.SanPham.TenSanPham</h6>
+                                <p class="text-muted mb-1">
+                                    <small>Màu: @item.BienThe.MauSac | Size: @item.BienThe.Size</small>
+                                </p>
+                                <p class="text-muted mb-0">
+                                    <small>SKU: @item.BienThe.MaSku</small>
+                                </p>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <strong>@item.DonGia.ToString("N0")đ</strong>
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <strong>x @item.SoLuong</strong>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <strong class="text-danger">@item.ThanhTien.ToString("N0")đ</strong>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Shipping Info -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-shipping-fast"></i> Thông tin giao hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong><i class="fas fa-map-marker-alt"></i> Địa chỉ:</strong><br>
+                            @Model.DiaChiGiao
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong><i class="fas fa-phone"></i> Số điện thoại:</strong><br>
+                            @Model.SoDienThoai
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary Sidebar -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Thông tin đơn hàng</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Mã đơn hàng:</strong><br>
+                        <span class="text-primary">@Model.MaDonHang</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Ngày đặt:</strong><br>
+                        @Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Trạng thái:</strong><br>
+                        @{
+                            var statusClass = Model.TrangThaiDonHang switch
+                            {
+                                "Chờ xác nhận" => "bg-warning",
+                                "Đã xác nhận" => "bg-info",
+                                "Đang giao" => "bg-primary",
+                                "Đã giao" => "bg-success",
+                                "Đã hủy" => "bg-danger",
+                                _ => "bg-secondary"
+                            };
+                        }
+                        <span class="badge @statusClass">@Model.TrangThaiDonHang</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Phương thức thanh toán:</strong><br>
+                        @Model.PhuongThucThanhToan
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Trạng thái thanh toán:</strong><br>
+                        <span class="badge @(Model.TrangThaiThanhToan == "Đã thanh toán" ? "bg-success" : "bg-secondary")">
+                            @Model.TrangThaiThanhToan
+                        </span>
+                    </div>
+
+                    @if (Model.NgayCapNhat.HasValue)
+                    {
+                        <div class="mb-3">
+                            <strong>Cập nhật lần cuối:</strong><br>
+                            <small>@Model.NgayCapNhat.Value.ToString("dd/MM/yyyy HH:mm")</small>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Price Summary -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-calculator"></i> Tổng kết</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tạm tính:</span>
+                        <strong>@Model.TamTinh.ToString("N0")đ</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Phí vận chuyển:</span>
+                        <strong>@Model.PhiVanChuyen?.ToString("N0")đ</strong>
+                    </div>
+
+                    @if (Model.TienGiam.HasValue && Model.TienGiam > 0)
+                    {
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-success">
+                                <i class="fas fa-tag"></i> Giảm giá
+                                @if (Model.MaKhuyenMai != null)
+                                {
+                                    <br><small>(@Model.MaKhuyenMai.MaCode)</small>
+                                }
+                            </span>
+                            <strong class="text-success">-@Model.TienGiam.Value.ToString("N0")đ</strong>
+                        </div>
+                    }
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <strong class="fs-5">Tổng cộng:</strong>
+                        <strong class="text-danger fs-4">@Model.TongTien.ToString("N0")đ</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <a asp-action="MyOrders" class="btn btn-outline-primary w-100 mb-2">
+                <i class="fas fa-arrow-left"></i> Quay lại danh sách
+            </a>
+
+            @if (Model.TrangThaiDonHang == "Chờ xác nhận")
+            {
+                <button class="btn btn-outline-danger w-100" onclick="cancelOrder(@Model.Id)">
+                    <i class="fas fa-times"></i> Hủy đơn hàng
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function cancelOrder(orderId) {
+            if (!confirm('Bạn có chắc muốn hủy đơn hàng này?')) return;
+            
+            // TODO: Implement cancel order functionality
+            alert('Chức năng hủy đơn hàng đang được phát triển. Vui lòng liên hệ hotline để hủy đơn.');
+        }
+    </script>
+}

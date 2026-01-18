@@ -1,0 +1,182 @@
+﻿@model SHOESTKC.CSDL.NguoiDung
+
+@{
+    ViewData["Title"] = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-user"></i> Chi tiết khách hàng</h2>
+        <a asp-action="Index" asp-controller="KhachHang" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="row">
+        <!-- Thông tin cá nhân -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-user-circle"></i> Thông tin cá nhân</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Họ tên:</strong>
+                        <p class="mb-0">@Model.HoTen</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Email:</strong>
+                        <p class="mb-0">@Model.Email</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Số điện thoại:</strong>
+                        <p class="mb-0">
+                            @(string.IsNullOrEmpty(Model.SoDienThoai) ? "Chưa cập nhật" : Model.SoDienThoai)
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Địa chỉ:</strong>
+                        <p class="mb-0">
+                            @(string.IsNullOrEmpty(Model.DiaChi) ? "Chưa cập nhật" : Model.DiaChi)
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Vai trò:</strong>
+                        <span class="badge bg-info">@Model.VaiTro</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-2">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar"></i>
+                            Ngày tạo: @Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")
+                        </small>
+                    </div>
+                    <div>
+                        <small class="text-muted">
+                            <i class="fas fa-sync"></i>
+                            Cập nhật: @Model.NgayCapNhat?.ToString("dd/MM/yyyy HH:mm")
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách đơn hàng -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-shopping-bag"></i>
+                        Lịch sử đơn hàng (@(Model.DonHang?.Count ?? 0))
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.DonHang != null && Model.DonHang.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái đơn</th>
+                                        <th>Thanh toán</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.DonHang.OrderByDescending(d => d.NgayTao))
+                                    {
+                                        <tr>
+                                            <td><strong>@order.MaDonHang</strong></td>
+                                            <td>@(order.NgayTao?.ToString("dd/MM/yyyy") ?? "")</td>
+                                            <td>
+                                                <strong class="text-danger">
+                                                    @order.TongTien.ToString("N0") đ
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                @switch (order.TrangThaiDonHang)
+                                                {
+                                                    case "cho_xac_nhan":
+                                                        <span class="badge bg-warning">Chờ xác nhận</span>
+                                                        break;
+                                                    case "da_xac_nhan":
+                                                        <span class="badge bg-info">Đã xác nhận</span>
+                                                        break;
+                                                    case "dang_giao":
+                                                        <span class="badge bg-primary">Đang giao</span>
+                                                        break;
+                                                    case "da_giao":
+                                                        <span class="badge bg-success">Đã giao</span>
+                                                        break;
+                                                    case "da_huy":
+                                                        <span class="badge bg-danger">Đã hủy</span>
+                                                        break;
+                                                    default:
+                                                        <span class="badge bg-secondary">@order.TrangThaiDonHang</span>
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (order.TrangThaiThanhToan == "da_thanh_toan")
+                                                {
+                                                    <span class="badge bg-success">Đã thanh toán</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning">Chưa thanh toán</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-action="ChiTietHoaDon"
+                                                   asp-controller="Admin"
+                                                   asp-route-id="@order.Id"
+                                                   class="btn btn-sm btn-info"
+                                                   title="Xem chi tiết">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong>Thống kê:</strong>
+                            <ul class="mb-0">
+                                <li>Tổng đơn hàng: <strong>@Model.DonHang.Count</strong></li>
+                                <li>
+                                    Tổng chi tiêu:
+                                    <strong class="text-danger">
+                                        @Model.DonHang.Sum(d => d.TongTien).ToString("N0") đ
+                                    </strong>
+                                </li>
+                                <li>
+                                    Đơn hoàn thành:
+                                    <strong>@Model.DonHang.Count(d => d.TrangThaiDonHang == "da_giao")</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle"></i>
+                            Khách hàng chưa có đơn hàng nào.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

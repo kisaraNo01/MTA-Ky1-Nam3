@@ -1,0 +1,79 @@
+﻿@model SHOESTKC.CSDL.NguoiDung
+
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex justify-content-center align-items-center py-5">
+    <div class="card shadow-lg" style="width: 100%; max-width: 550px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Đăng ký tài khoản</h2>
+            </div>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <form asp-action="Register" asp-controller="Auth" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="HoTen" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                    <input asp-for="HoTen" class="form-control" placeholder="VD: Nguyễn Văn A" required>
+                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="VD: example@gmail.com" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SoDienThoai" class="form-label">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" placeholder="VD: 0912345678">
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DiaChi" class="form-label">Địa chỉ</label>
+                    <textarea asp-for="DiaChi" class="form-control" rows="2" placeholder="Nhập địa chỉ của bạn"></textarea>
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MatKhau" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+                    <input asp-for="MatKhau" type="password" class="form-control" placeholder="Tối thiểu 6 ký tự" required>
+                    <span asp-validation-for="MatKhau" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="agree" required>
+                    <label class="form-check-label" for="agree">
+                        Tôi đồng ý với <a href="#">điều khoản dịch vụ</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="fas fa-user-plus"></i> Đăng ký
+                </button>
+
+                <div class="text-center">
+                    <p class="mb-0">
+                        Đã có tài khoản? <a asp-action="Login" asp-controller="Auth">Đăng nhập</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

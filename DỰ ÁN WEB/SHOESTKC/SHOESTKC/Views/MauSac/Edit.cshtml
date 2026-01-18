@@ -1,0 +1,104 @@
+﻿@model SHOESTKC.CSDL.MauSac
+@{
+    ViewData["Title"] = "Sửa Màu Sắc";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h2><i class="fas fa-edit"></i> Sửa Màu Sắc</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index">Quản lý Màu Sắc</a></li>
+                    <li class="breadcrumb-item active">Sửa: @Model.TenMau</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Thông Tin Màu Sắc</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="NgayTao" />
+                        
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="TenMau" class="form-label">Tên Màu <span class="text-danger">*</span></label>
+                            <input asp-for="TenMau" class="form-control" />
+                            <span asp-validation-for="TenMau" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="MaHex" class="form-label">Mã Màu Hex</label>
+                            <input asp-for="MaHex" type="color" class="form-control form-control-color" />
+                            <span asp-validation-for="MaHex" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input name="TrangThai" class="form-check-input" type="checkbox" id="TrangThai" value="true" @(Model.TrangThai == true ? "checked" : "") />
+                                <input name="TrangThai" type="hidden" value="false" />
+                                <label for="TrangThai" class="form-check-label">Kích hoạt</label>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> 
+                            Ngày tạo: <strong>@Model.NgayTao?.ToString("dd/MM/yyyy HH:mm")</strong>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save"></i> Cập Nhật
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Thống Kê Sử Dụng</h5>
+                </div>
+                <div class="card-body">
+                    <p>Màu <strong>@Model.TenMau</strong> đang được sử dụng bởi:</p>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3 class="text-primary">@Model.BienThe.Count</h3>
+                                    <p class="mb-0">Biến thể sản phẩm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @if (Model.BienThe.Count > 0)
+                    {
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Lưu ý:</strong> Màu này đang được sử dụng. Nếu tắt trạng thái, các biến thể sẽ không hiển thị trên website.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
